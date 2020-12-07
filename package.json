@@ -52,12 +52,10 @@
         "subscriptions-transport-ws": "^0.9.16"
     },
     "scripts": {
-        "dev": "react-scripts start",
-        "start": "serve -s build",
+        "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject",
-        "heroku-postbuild": "npm run build"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -86,3 +84,4 @@
         "node": "^12.18.4"
     }
 }
+
