@@ -1,0 +1,81 @@
+import styled, { keyframes } from 'styled-components';
+
+const colorSpinner = '#00AEEF';
+const rotateOne = keyframes`
+    0% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+`;
+
+const rotateTwo = keyframes`
+    0% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+  `;
+
+const rotateThree = keyframes`
+    0% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+  `;
+
+export const LoadingContainer = styled.div`
+  height: ${(props) => (props.mode === 'panel' ? 'unset' : '100vh')};
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: ${(props) => (props.mode === 'panel' ? '100px' : '200px')};
+    width: auto;
+  }
+
+  //--------------------
+  .loader {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    perspective: 800px;
+  }
+
+  .inner {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .inner.one {
+    left: 0%;
+    top: 0%;
+    animation: ${rotateOne} 1s linear infinite;
+    border-bottom: 3px solid ${colorSpinner};
+  }
+
+  .inner.two {
+    right: 0%;
+    top: 0%;
+    animation: ${rotateTwo} 1s linear infinite;
+    border-right: 3px solid ${colorSpinner};
+  }
+
+  .inner.three {
+    right: 0%;
+    bottom: 0%;
+    animation: ${rotateThree} 1s linear infinite;
+    border-top: 3px solid ${colorSpinner};
+  }
+`;

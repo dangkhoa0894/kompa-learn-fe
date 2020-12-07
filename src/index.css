@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: Lato, sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-BoldItalic.ttf");
+    font-weight:bolder;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-LightItalic.ttf");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Black.ttf");
+    font-weight: 900;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-BlackItalic.ttf");
+    font-weight: 900;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Hairline.ttf");
+    font-weight: 200;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-HairlineItalic.ttf");
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Heavy.ttf");
+    font-weight: bold;
+
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-HeavyItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Italic.ttf");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Medium.ttf");
+    font-weight: 500;
+
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-MediumItalic.ttf");
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Regular.ttf");
+    font-weight: 400;
+
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Semibold.ttf");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-SemiboldItalic.ttf");
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-Thin.ttf");
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url("./resource/font/Lato/Lato-ThinItalic.ttf");
+    font-weight: 100;
+    font-style: italic;
+}

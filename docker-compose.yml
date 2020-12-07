@@ -1,0 +1,11 @@
+  version: "3.5"
+
+  services:
+    main-service:
+      container_name: front-end-nlp
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - 3333:3000 
+     
