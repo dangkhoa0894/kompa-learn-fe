@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { useState, useEffect, memo } from 'react';
-import { STEP_CREATE_MODEL, ERROR_CODE, _TYPENAME } from 'resource/string';
-import { useHistory } from 'react-router-dom';
-import { getUnixTime } from 'date-fns';
-import { Tooltip, Modal, notification } from 'antd';
-import { TRAIN_DATA } from 'graphql/Model/Mutations';
-import { useMutation } from '@apollo/client';
-import LoadingText from 'components/common/LoadingText';
-import { StatusContainer, ProcessCss, StatusCss } from './styled';
+import PropTypes from "prop-types";
+import React, { useState, useEffect, memo } from "react";
+import { STEP_CREATE_MODEL, ERROR_CODE, _TYPENAME } from "SRC/resource/string";
+import { useHistory } from "react-router-dom";
+import { getUnixTime } from "date-fns";
+import { Tooltip, Modal, notification } from "antd";
+import { TRAIN_DATA } from "SRC/graphql/Model/Mutations";
+import { useMutation } from "@apollo/client";
+import LoadingText from "SRC/components/common/LoadingText";
+import { StatusContainer, ProcessCss, StatusCss } from "./styled";
 
 const StatusModel = (props) => {
   const { process, id, timeTrain, modelTrainSuccess, ...other } = props;
@@ -18,7 +18,7 @@ const StatusModel = (props) => {
     if ((other.typeData === 2 || other.score.length > 0) && process === 5) {
       e.stopPropagation();
       Modal.info({
-        title: 'Message Train',
+        title: "Message Train",
         content: (
           <div>
             <p>
@@ -28,7 +28,7 @@ const StatusModel = (props) => {
           </div>
         ),
         okCancel() {},
-        okText: loading ? <LoadingText title="Loading..." /> : 'Train model',
+        okText: loading ? <LoadingText title="Loading..." /> : "Train model",
         onOk() {
           if (!loading) {
             doTrain({
@@ -55,18 +55,18 @@ const StatusModel = (props) => {
                       },
                     });
                     notification.success({
-                      message: 'Message',
-                      description: 'In process train!',
+                      message: "Message",
+                      description: "In process train!",
                     });
                   } catch (err) {
                     notification.error({
-                      message: 'Message error ',
+                      message: "Message error ",
                       description: err.message,
                     });
                   }
                 } else {
                   notification.error({
-                    message: 'Message error ',
+                    message: "Message error ",
                     description: trainModel.message,
                   });
                 }
@@ -94,7 +94,11 @@ const StatusModel = (props) => {
     );
   }
 
-  return <StatusContainer onClick={goToContinue}>{showTitle || 'Chưa cập nhật'}</StatusContainer>;
+  return (
+    <StatusContainer onClick={goToContinue}>
+      {showTitle || "Chưa cập nhật"}
+    </StatusContainer>
+  );
 };
 
 StatusModel.propTypes = {
@@ -182,33 +186,35 @@ ProcessTrain.defaultProps = {
 
 const StatusItem = (props) => {
   const { process } = props;
-  let tempClass = '';
+  let tempClass = "";
   switch (process) {
     // case 1:
     //   tempClass = 'configuring';
     //   break;
     case 2:
-      tempClass = 'pending';
+      tempClass = "pending";
       break;
     case 1:
     case 3:
     case 4:
-      tempClass = 'inProgress';
+      tempClass = "inProgress";
       break;
     case 5:
-      tempClass = 'train';
+      tempClass = "train";
       break;
     case 7:
-      tempClass = 'completed';
+      tempClass = "completed";
       break;
     default:
-      tempClass = 'error';
+      tempClass = "error";
       break;
   }
   return (
     <StatusCss>
       <Tooltip placement="topRight" title={STEP_CREATE_MODEL[process]?.label}>
-        <div className={`status ${tempClass}`}>{STEP_CREATE_MODEL[process]?.status}</div>
+        <div className={`status ${tempClass}`}>
+          {STEP_CREATE_MODEL[process]?.status}
+        </div>
       </Tooltip>
     </StatusCss>
   );

@@ -1,14 +1,14 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useEffect, useState, useCallback } from "react";
+import { useQuery, useMutation } from "@apollo/client";
 import {
   GET_ALL_ALGORITHM,
   GET_DETAIL_MODEL,
   GET_ACTIVE_MODIFY_MODEL,
   GET_ALL_ID_MODEL,
-} from 'graphql/Model/Query';
-import { INACTIVE_MODEL } from 'graphql/Model/Mutations';
-import { ERROR_CODE } from 'resource/string';
-import { notification } from 'antd';
+} from "SRC/graphql/Model/Query";
+import { INACTIVE_MODEL } from "SRC/graphql/Model/Mutations";
+import { ERROR_CODE } from "SRC/resource/string";
+import { notification } from "antd";
 
 export const useGetAllAlgorithm = () => {
   const { data, loading } = useQuery(GET_ALL_ALGORITHM);
@@ -31,7 +31,7 @@ export const useGetDetailModel = ({ model, cache = true }) => {
       },
     },
     skip: !model?.id,
-    fetchPolicy: cache ? 'cache-first' : 'network-only',
+    fetchPolicy: cache ? "cache-first" : "network-only",
   });
   return [
     {
@@ -48,7 +48,7 @@ export const useGetDetailModelNoCache = ({ model }) => {
         modelId: parseInt(model?.id, 10),
       },
     },
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
   });
   return [
     {
@@ -74,7 +74,7 @@ export const useRemoveModel = () => {
             fields: {
               getAllModels(existingData, { readField }) {
                 const a = existingData.data.filter(
-                  (commentRef) => evt.modelId !== readField('id', commentRef),
+                  (commentRef) => evt.modelId !== readField("id", commentRef)
                 );
                 return {
                   ...existingData,
@@ -84,8 +84,8 @@ export const useRemoveModel = () => {
             },
           });
           notification.success({
-            message: 'Message',
-            description: 'Remove model successful',
+            message: "Message",
+            description: "Remove model successful",
           });
         }
       },

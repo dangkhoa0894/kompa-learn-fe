@@ -1,40 +1,54 @@
-import PropTypes from 'prop-types';
-import React, { useState, useMemo, useCallback, memo, useEffect, useRef } from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_ALL_MODELS } from 'graphql/Model/Query';
-import { useUpdateModel, useUploadModelSubscriptions } from 'hooks/Realtime';
-import { useInfoUser } from 'hooks/User';
-import TableData from 'components/common/TableModel';
-import { format } from 'date-fns';
-import StatusModel from 'components/StatusModel';
-import { FaListOl, FaTh } from 'react-icons/fa';
-import { Typography, notification } from 'antd';
-import { viewDetailModel } from 'graphql/Cache/initialCache';
+import PropTypes from "prop-types";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  memo,
+  useEffect,
+  useRef,
+} from "react";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_MODELS } from "SRC/graphql/Model/Query";
+import {
+  useUpdateModel,
+  useUploadModelSubscriptions,
+} from "SRC/hooks/Realtime";
+import { useInfoUser } from "SRC/hooks/User";
+import TableData from "SRC/components/common/TableModel";
+import { format } from "date-fns";
+import StatusModel from "SRC/components/StatusModel";
+import { FaListOl, FaTh } from "react-icons/fa";
+import { Typography, notification } from "antd";
+import { viewDetailModel } from "SRC/graphql/Cache/initialCache";
 /* eslint-disable */
-import Sentiment_icon from 'resource/images/sentiment_icon.png';
-import Topic_icon from 'resource/images/topic_icon.png';
-import Multiple_icon from 'resource/images/multiple_icon.png';
-import { ModelUserContainer, ContentTable } from './styled';
-import ItemTable from './components/ItemTable';
-import EmptyData from './components/EmptyData';
-import ModelAction from './components/Action';
-import CalculatorAccuracy from './components/CalculatorAccuracy';
-import { debounce } from 'utils/function';
+import Sentiment_icon from "SRC/resource/images/sentiment_icon.png";
+import Topic_icon from "SRC/resource/images/topic_icon.png";
+import Multiple_icon from "SRC/resource/images/multiple_icon.png";
+import { ModelUserContainer, ContentTable } from "./styled";
+import ItemTable from "./components/ItemTable";
+import EmptyData from "./components/EmptyData";
+import ModelAction from "./components/Action";
+import CalculatorAccuracy from "./components/CalculatorAccuracy";
+import { debounce } from "SRC/utils/function";
 
 const typeListModel = [
   {
-    id: 'list',
-    label: 'List',
+    id: "list",
+    label: "List",
     icon: <FaListOl />,
   },
   {
-    id: 'grid',
-    label: 'grid',
+    id: "grid",
+    label: "grid",
     icon: <FaTh />,
   },
 ];
 
-const typeModel = ['Topic Classification', 'Sentiment', 'Multiple Topic & Sentiment'];
+const typeModel = [
+  "Topic Classification",
+  "Sentiment",
+  "Multiple Topic & Sentiment",
+];
 const typeIcon = [
   <img src={Topic_icon} alt="topic" className="topic" />,
   <img src={Sentiment_icon} alt="sentiment" className="sentiment" />,
@@ -47,13 +61,13 @@ const ModelUser = (props) => {
   const [dataModel, setDataModel] = useState([]);
   const { data, loading } = useQuery(GET_ALL_MODELS, {
     variables: { dataInput: infoUser.id },
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
     skip: !infoUser?.id,
   });
   const [{ modelTrain }] = useUpdateModel({ userId: infoUser.id });
   useUploadModelSubscriptions({ userId: infoUser.id });
   const refBody = useRef(null);
-  const [typeGrid, setTypeGrid] = useState('list');
+  const [typeGrid, setTypeGrid] = useState("list");
   const [heightResize, setHeightResize] = useState({});
 
   const setHeightDebounce = debounce(setHeightResize, 200);
@@ -99,16 +113,16 @@ const ModelUser = (props) => {
     return heightResize.maxHeight;
   };
   useEffect(() => {
-    window.addEventListener('resize', resizeListener);
+    window.addEventListener("resize", resizeListener);
     return () => {
-      window.removeEventListener('resize', resizeListener);
+      window.removeEventListener("resize", resizeListener);
     };
   }, []);
 
   const columns = useMemo(() => [
     {
-      title: '',
-      dataIndex: 'icon1',
+      title: "",
+      dataIndex: "icon1",
       minWidth: 100,
       maxWidth: 150,
       render: (e) => (
@@ -118,8 +132,8 @@ const ModelUser = (props) => {
       ),
     },
     {
-      title: 'My Training Project',
-      dataIndex: 'modelName',
+      title: "My Training Project",
+      dataIndex: "modelName",
       sorter: true,
       maxWidth: 200,
       ellipsis: true,
@@ -130,18 +144,18 @@ const ModelUser = (props) => {
           <ItemTable
             data={{
               title: e.modelName,
-              subtitle: e.descriptions || 'Chưa cập nhật', // None
+              subtitle: e.descriptions || "Chưa cập nhật", // None
             }}
           />
         );
       },
     },
     {
-      title: 'Accuracy',
-      dataIndex: 'accuracy',
+      title: "Accuracy",
+      dataIndex: "accuracy",
       ellipsis: true,
       sort: true,
-      textAlign: 'left',
+      textAlign: "left",
       sortData: (e) => {
         e.sort((a, b) => {
           return (
@@ -165,8 +179,8 @@ const ModelUser = (props) => {
       },
     },
     {
-      title: 'Classification',
-      dataIndex: 'typeModel',
+      title: "Classification",
+      dataIndex: "typeModel",
       minWidth: 150,
       sort: true,
       render: (e) => {
@@ -174,45 +188,49 @@ const ModelUser = (props) => {
           <ItemTable
             data={{
               title: typeModel[e.typeModel - 1],
-              subtitle: e.totalCategories ? `Count: ${e.totalCategories}` : 'Chưa cập nhật',
+              subtitle: e.totalCategories
+                ? `Count: ${e.totalCategories}`
+                : "Chưa cập nhật",
             }}
           />
         );
       },
     },
     {
-      title: 'Status',
-      dataIndex: 'process',
+      title: "Status",
+      dataIndex: "process",
       sort: true,
       minWidth: 150,
-      textAlign: 'center',
+      textAlign: "center",
       render: (e) => {
         return <StatusModel {...e} modelTrainSuccess={modelTrain} />;
       },
     },
     {
-      title: 'Algorithm',
-      dataIndex: 'algorithm',
+      title: "Algorithm",
+      dataIndex: "algorithm",
       minWidth: 250,
       render: (e) => (
         <ItemTable
           data={{
-            title: e?.score[0]?.algorithm?.name || 'Chưa cập nhật',
-            subtitle: `Previous: ${e.score[1]?.algorithm?.name || 'Chưa cập nhật'} `,
+            title: e?.score[0]?.algorithm?.name || "Chưa cập nhật",
+            subtitle: `Previous: ${
+              e.score[1]?.algorithm?.name || "Chưa cập nhật"
+            } `,
             lastUpdate: `Last update: ${
               e?.score[1]?.updateAt
-                ? format(new Date(e?.score[1]?.updateAt), 'dd/MM/yyyy HH:mm:ss')
-                : 'Chưa cập nhật'
+                ? format(new Date(e?.score[1]?.updateAt), "dd/MM/yyyy HH:mm:ss")
+                : "Chưa cập nhật"
             }`,
           }}
         />
       ),
     },
     {
-      title: '',
-      dataIndex: 'action',
+      title: "",
+      dataIndex: "action",
       minWidth: 150,
-      textAlign: 'right',
+      textAlign: "right",
       render: (e) => <ModelAction {...e} />,
     },
   ]);
@@ -232,7 +250,7 @@ const ModelUser = (props) => {
             &nbsp; is pending, can't use now.
           </Typography.Text>
         ),
-        message: 'Caution message',
+        message: "Caution message",
       });
     }
   });
@@ -258,7 +276,11 @@ const ModelUser = (props) => {
   const dataModelMemo = useMemo(() => dataModel);
   const loadingMemo = useMemo(() => loading);
   return !infoUser?.id || loading || dataModel?.length > 0 ? (
-    <ModelUserContainer isMoreTemplate={isMoreTemplate} maxHeight={getHeight()} ref={refBody}>
+    <ModelUserContainer
+      isMoreTemplate={isMoreTemplate}
+      maxHeight={getHeight()}
+      ref={refBody}
+    >
       <div className="motion">
         <div className="type-list-model">
           {typeListModel.map((item) => {
@@ -266,12 +288,14 @@ const ModelUser = (props) => {
               <div
                 role="presentation"
                 key={item.id}
-                className={`item-type ${item.id === typeGrid && 'active'}`}
+                className={`item-type ${item.id === typeGrid && "active"}`}
                 onClick={() => setTypeGrid(item.id)}
                 onKeyPress={() => setTypeGrid(item.id)}
               >
                 {item.icon}
-                <Typography.Text className="label-type">{item.label}</Typography.Text>
+                <Typography.Text className="label-type">
+                  {item.label}
+                </Typography.Text>
               </div>
             );
           })}

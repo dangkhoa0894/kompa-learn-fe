@@ -1,23 +1,23 @@
-import React from 'react';
-import { Redirect, Switch, Route, useParams } from 'react-router-dom';
-import StepBarView from 'components/common/StepBar';
-import UploadFileView from 'site/user/containers/Upload';
-import ChooseTextView from 'site/user/containers/ChooseTextImport/ChooseTextView';
-import DefineTagsView from 'site/user/containers/DefineTags/DefineTagsView';
-import TrainDataView from 'site/user/containers/TrainTagData/TrainTagDataView';
+import React from "react";
+import { Redirect, Switch, Route, useParams } from "react-router-dom";
+import StepBarView from "SRC/components/common/StepBar";
+import UploadFileView from "SRC/site/user/containers/Upload";
+import ChooseTextView from "SRC/site/user/containers/ChooseTextImport/ChooseTextView";
+import DefineTagsView from "SRC/site/user/containers/DefineTags/DefineTagsView";
+import TrainDataView from "SRC/site/user/containers/TrainTagData/TrainTagDataView";
 
-import { SetupDataContainer, BodyModule } from './styled';
+import { SetupDataContainer, BodyModule } from "./styled";
 
 const steps = [
   {
-    id: 'upload-file',
-    title: 'Upload File',
+    id: "upload-file",
+    title: "Upload File",
   },
-  { id: 'define-tag', title: 'Define Tag' },
+  { id: "define-tag", title: "Define Tag" },
 
   {
-    id: 'train',
-    title: 'Training',
+    id: "train",
+    title: "Training",
   },
 ];
 
@@ -38,10 +38,26 @@ function ModuleView() {
       <BodyModule>
         <Switch>
           {/* define-tag */}
-          <Route exact path="/model/setup/upload/:modelId" component={UploadFileView} />
-          <Route exact path="/model/setup/column/:modelId" component={ChooseTextView} />
-          <Route exact path="/model/setup/defineTag/:modelId" component={DefineTagsView} />
-          <Route exact path="/model/setup/train/:modelId" component={TrainDataView} />
+          <Route
+            exact
+            path="/model/setup/upload/:modelId"
+            component={UploadFileView}
+          />
+          <Route
+            exact
+            path="/model/setup/column/:modelId"
+            component={ChooseTextView}
+          />
+          <Route
+            exact
+            path="/model/setup/defineTag/:modelId"
+            component={DefineTagsView}
+          />
+          <Route
+            exact
+            path="/model/setup/train/:modelId"
+            component={TrainDataView}
+          />
 
           <Route>
             <Redirect to="/pageNotFound" />

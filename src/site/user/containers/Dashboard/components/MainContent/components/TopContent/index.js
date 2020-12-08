@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { FaSearch, FaPlus } from 'react-icons/fa';
-import { Typography } from 'antd';
-import { useHistory } from 'react-router-dom';
-import ButtonMenu from 'components/common/ButtonMenu';
-import { TopContent } from './styled';
+import PropTypes from "prop-types";
+import React from "react";
+import { FaSearch, FaPlus } from "react-icons/fa";
+import { Typography } from "antd";
+import { useHistory } from "react-router-dom";
+import ButtonMenu from "SRC/components/common/ButtonMenu";
+import { TopContent } from "./styled";
 
 const TopContentDashBoard = (props) => {
   const { toggleShowDetail, isShowDetail } = props;
 
   const history = useHistory();
   const createModel = () => {
-    history.push('/model/create');
+    history.push("/model/create");
   };
 
   return (

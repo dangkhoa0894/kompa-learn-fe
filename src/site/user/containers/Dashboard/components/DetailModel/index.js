@@ -1,15 +1,21 @@
-import PropTypes from 'prop-types';
-import React, { memo, useEffect, useMemo, useState } from 'react';
-import { notification, Typography } from 'antd';
-import { ERROR_CODE, TYPE_MODEL } from 'resource/string';
-import { GET_INFO_MODEL_CLIENT, GET_PREDICT_DEMO } from 'graphql/Model/Query';
-import { useQuery, useLazyQuery } from '@apollo/client';
-import { useGetDetailModel } from 'hooks/Model';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { useHistory } from 'react-router-dom';
-import noData from 'resource/images/noData_1.jpg';
-import { contentModifyModel, viewDetailModel } from 'graphql/Cache/initialCache';
-import ItemData from 'components/ItemPredict';
+import PropTypes from "prop-types";
+import React, { memo, useEffect, useMemo, useState } from "react";
+import { notification, Typography } from "antd";
+import { ERROR_CODE, TYPE_MODEL } from "SRC/resource/string";
+import {
+  GET_INFO_MODEL_CLIENT,
+  GET_PREDICT_DEMO,
+} from "SRC/graphql/Model/Query";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { useHistory } from "react-router-dom";
+import noData from "SRC/resource/images/noData_1.jpg";
+import {
+  contentModifyModel,
+  viewDetailModel,
+} from "SRC/graphql/Cache/initialCache";
+import ItemData from "SRC/components/ItemPredict";
 import {
   WrapperInfoModel,
   InfoContainer,
@@ -17,16 +23,19 @@ import {
   TitleProperties,
   TitleHeader,
   RefreshCss,
-} from './styled';
+} from "./styled";
 
 const DetailModel = (props) => {
   const { isShowDetail } = props;
 
   const { data } = useQuery(GET_INFO_MODEL_CLIENT);
 
-  const [doRefresh, { loading, data: dataPredict }] = useLazyQuery(GET_PREDICT_DEMO, {
-    fetchPolicy: 'network-only',
-  });
+  const [doRefresh, { loading, data: dataPredict }] = useLazyQuery(
+    GET_PREDICT_DEMO,
+    {
+      fetchPolicy: "network-only",
+    }
+  );
 
   const [{ data: dataModel }] = useGetDetailModel({
     model: {
@@ -62,7 +71,7 @@ const DetailModel = (props) => {
         }
       } else {
         notification.error({
-          message: 'Error message',
+          message: "Error message",
           description: tempData.message,
         });
       }
@@ -113,16 +122,18 @@ const InfoModel = memo((props) => {
   return (
     <InfoContainer>
       <Typography.Title level={2} className="model-name">
-        {modelName || 'Loading...'}
+        {modelName || "Loading..."}
       </Typography.Title>
       <Typography.Text strong className="department-model">
-        {owner || 'Chưa cập nhật'}
+        {owner || "Chưa cập nhật"}
       </Typography.Text>
       <TitleProperties>Project Descriptions</TitleProperties>
-      <div className="info-model">{descriptions || 'Chưa cập nhật'}</div>
+      <div className="info-model">{descriptions || "Chưa cập nhật"}</div>
       <TitleProperties>Training Classification</TitleProperties>
       <div className="info-model">
-        <span>{TYPE_MODEL[dataModel.typeModel - 1]?.label || 'Chưa cập nhật'} </span>
+        <span>
+          {TYPE_MODEL[dataModel.typeModel - 1]?.label || "Chưa cập nhật"}{" "}
+        </span>
         {TYPE_MODEL[dataModel.typeModel - 1]?.icon}
       </div>
     </InfoContainer>
@@ -140,10 +151,10 @@ InfoModel.propTypes = {
 
 InfoModel.defaultProps = {
   dataModel: {
-    modelName: 'Loading...',
-    owner: 'Loading...',
-    typeModel: 'Loading...',
-    descriptions: 'Loading...',
+    modelName: "Loading...",
+    owner: "Loading...",
+    typeModel: "Loading...",
+    descriptions: "Loading...",
   },
 };
 
@@ -153,8 +164,8 @@ const DataTrain = (props) => {
 
   const changePage = () => {
     contentModifyModel({
-      contentActive: '',
-      data: '',
+      contentActive: "",
+      data: "",
     });
     history.push(`/model/modify-data/view/${dataModel.id}`);
   };
@@ -175,7 +186,9 @@ const DataTrain = (props) => {
             {dataPredict &&
               dataPredict.length > 0 &&
               dataPredict.map((item) => {
-                return <ItemData dataModel={dataModel} key={item.id} {...item} />;
+                return (
+                  <ItemData dataModel={dataModel} key={item.id} {...item} />
+                );
               })}
             <RefreshCss onClick={onRefresh}>
               <Typography.Text>Load more</Typography.Text>

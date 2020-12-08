@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 // TOP CONTENT
 // MODEL OF USER
 export const ModelUserContainer = styled.div`
@@ -21,8 +21,9 @@ export const ModelUserContainer = styled.div`
     background: white;
     width: 100%;
     height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
-    height: ${({ isMoreTemplate }) => isMoreTemplate && '0px'};
-    /* display: ${({ isMoreTemplate }) => (isMoreTemplate ? 'none' : 'flex')}; */
+    height: ${({ isMoreTemplate }) => isMoreTemplate && "0px"};
+    /* display: ${({ isMoreTemplate }) =>
+      isMoreTemplate ? "none" : "flex"}; */
     display: flex;
     flex-direction: column;
     transition: all 0.2s;
@@ -37,7 +38,7 @@ export const ModelUserContainer = styled.div`
     flex-direction: row;
     justify-items: center;
     padding: 15px 15px 0px;
-    display: ${({ isMoreTemplate }) => isMoreTemplate && 'none'};
+    display: ${({ isMoreTemplate }) => isMoreTemplate && "none"};
 
     .item-type {
       display: flex;

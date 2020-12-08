@@ -1,6 +1,6 @@
-import { Row } from 'antd';
-import styled from 'styled-components';
-import media from 'styles/media';
+import { Row } from "antd";
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
 export const WrapperAnalysis = styled.div`
   display: flex;

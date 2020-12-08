@@ -1,10 +1,10 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-const { useCallback } = require('react');
-const { useMutation } = require('@apollo/client');
-const { UPDATE_CONFIG_MODEL } = require('graphql/Model/Mutations');
-const { notification } = require('antd');
-const { ERROR_CODE, _TYPENAME } = require('resource/string');
+const { useCallback } = require("react");
+const { useMutation } = require("@apollo/client");
+const { UPDATE_CONFIG_MODEL } = require("SRC/graphql/Model/Mutations");
+const { notification } = require("antd");
+const { ERROR_CODE, _TYPENAME } = require("SRC/resource/string");
 
 export const useUpdateConfigModel = () => {
   const [doUpdate, { loading }] = useMutation(UPDATE_CONFIG_MODEL);
@@ -29,13 +29,13 @@ export const useUpdateConfigModel = () => {
               },
             });
             notification.success({
-              message: 'Message',
-              description: 'Update new config successful',
+              message: "Message",
+              description: "Update new config successful",
             });
-            history.push('/main/dashBoard');
+            history.push("/main/dashBoard");
           } else {
             notification.error({
-              message: 'Message error ',
+              message: "Message error ",
               description: updateConfigModel.message,
             });
           }
@@ -43,7 +43,7 @@ export const useUpdateConfigModel = () => {
       });
     } catch (e) {
       notification.error({
-        message: 'Message error ',
+        message: "Message error ",
         description: e.message,
       });
     }

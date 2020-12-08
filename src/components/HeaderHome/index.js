@@ -1,8 +1,8 @@
-import React from 'react';
-import { Col, Typography } from 'antd';
-import ButtonJoin from 'components/BodyHome/components/ButtonJoin';
-import MenuHome from '../MenuHome';
-import { WrapperHeader, RowBanner } from './styled';
+import React from "react";
+import { Col, Typography } from "antd";
+import ButtonJoin from "SRC/components/BodyHome/components/ButtonJoin";
+import MenuHome from "../MenuHome";
+import { WrapperHeader, RowBanner } from "./styled";
 
 const HeaderHomeView = () => {
   return (
@@ -14,8 +14,9 @@ const HeaderHomeView = () => {
             Create new value from your data
           </Typography.Title>
           <Typography.Text className="color-title">
-            Train custom machine learning models to get topic, sentiment, intent, keywords and more.
-            Do it in hours —not weeks— right inside the tools you already love.
+            Train custom machine learning models to get topic, sentiment,
+            intent, keywords and more. Do it in hours —not weeks— right inside
+            the tools you already love.
           </Typography.Text>
           <ButtonJoin />
         </Col>

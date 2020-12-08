@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
-import { RiCloseFill } from 'react-icons/ri';
-import { Input, Button, Typography } from 'antd';
-import { useMutation } from '@apollo/client';
-import { PREDICT_CONTENT } from 'graphql/Model/Mutations';
-import { useParams } from 'react-router-dom';
-import LoadingText from 'components/common/LoadingText';
-import ItemSingle from 'components/common/ItemSingle';
-import { useGetDetailModel } from 'hooks/Model';
-import ItemMultiple from 'components/common/ItemMultiple';
-import { PredictPopupContainer } from './styled';
+import PropTypes from "prop-types";
+import React, { useRef, useState } from "react";
+import { RiCloseFill } from "react-icons/ri";
+import { Input, Button, Typography } from "antd";
+import { useMutation } from "@apollo/client";
+import { PREDICT_CONTENT } from "SRC/graphql/Model/Mutations";
+import { useParams } from "react-router-dom";
+import LoadingText from "SRC/components/common/LoadingText";
+import ItemSingle from "SRC/components/common/ItemSingle";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import ItemMultiple from "SRC/components/common/ItemMultiple";
+import { PredictPopupContainer } from "./styled";
 
 const PredictPopup = (props) => {
   const { togglePredict } = props;
@@ -51,8 +51,12 @@ const PredictPopup = (props) => {
         />
       </div>
       <div className="button-predict">
-        <Button type="primary" className="btn-run" onClick={!loading && doPredictContent}>
-          {loading ? <LoadingText /> : 'Run'}
+        <Button
+          type="primary"
+          className="btn-run"
+          onClick={!loading && doPredictContent}
+        >
+          {loading ? <LoadingText /> : "Run"}
         </Button>
       </div>
       <div className="res-predict">
@@ -64,7 +68,7 @@ const PredictPopup = (props) => {
                 // eslint-disable-next-line react/no-array-index-key
                 key={`${index}single`}
                 {...item}
-                mode={infoModel.typeModel === 2 ? 'sentiment' : 'label'}
+                mode={infoModel.typeModel === 2 ? "sentiment" : "label"}
               />
             );
           }

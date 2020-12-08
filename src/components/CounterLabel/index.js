@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { useState, useMemo, useEffect } from 'react';
-import ModalView from 'components/common/Modal';
-import BarChart from 'components/common/Chart/Am/BarChart';
-import HorizontalBarChart from 'components/common/Chart/NChart/HorizontalBarChart';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
-import { Tooltip, Typography } from 'antd';
-import { CounterLabelContainer, BarChartCss } from './styled';
+import PropTypes from "prop-types";
+import React, { useState, useMemo, useEffect } from "react";
+import ModalView from "SRC/components/common/Modal";
+import BarChart from "SRC/components/common/Chart/Am/BarChart";
+import HorizontalBarChart from "SRC/components/common/Chart/NChart/HorizontalBarChart";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { Tooltip, Typography } from "antd";
+import { CounterLabelContainer, BarChartCss } from "./styled";
 
 const CounterLabel = (props) => {
   const { counterLabel, minHeight, numberRow, fontSizeTitle } = props;
@@ -56,7 +56,7 @@ const CounterLabel = (props) => {
           const tempSum = sum + currentValue;
           return tempSum;
         })
-      : 0,
+      : 0
   );
 
   const dataChartMemo = useMemo(() => dataChart, [dataChart]);
@@ -68,11 +68,15 @@ const CounterLabel = (props) => {
           {counterLabel &&
             Object.values(counterLabel)
               .length.toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </Tooltip>
       </Typography.Text>
       <div className="bar-chart-mini">
-        <div className="sort-bar-chart" onClick={doSortDataChart} role="presentation">
+        <div
+          className="sort-bar-chart"
+          onClick={doSortDataChart}
+          role="presentation"
+        >
           Sort by (%) &nbsp; {!isDescSort ? <FaCaretUp /> : <FaCaretDown />}
         </div>
         <HorizontalBarChart
@@ -80,7 +84,11 @@ const CounterLabel = (props) => {
           dataChart={dataChartMemo.slice(0, numberRow)}
           sumTags={sumTags}
         />
-        <div className="show-more-chart" onClick={toggleOpenChart} role="presentation">
+        <div
+          className="show-more-chart"
+          onClick={toggleOpenChart}
+          role="presentation"
+        >
           Show more
         </div>
       </div>
@@ -90,7 +98,10 @@ const CounterLabel = (props) => {
           // eslint-disable-next-line react/jsx-wrap-multilines
           <BarChartCss totalCategories={dataChart?.length || 0}>
             {counterLabel && (
-              <BarChart dataChart={[...dataChart].reverse()} id="chart_counter_label" />
+              <BarChart
+                dataChart={[...dataChart].reverse()}
+                id="chart_counter_label"
+              />
             )}
           </BarChartCss>
         }

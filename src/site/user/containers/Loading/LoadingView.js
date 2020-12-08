@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { LoadingContainer } from './styled';
+import PropTypes from "prop-types";
+import React from "react";
+import { LoadingContainer } from "./styled";
 
 function Loading(props) {
   const { mode } = props;
@@ -11,7 +11,6 @@ function Loading(props) {
         <div className="inner two" />
         <div className="inner three" />
       </div>
-      {/* <img src={LoadingAnimation} alt="loading..." /> */}
     </LoadingContainer>
   );
 }
@@ -20,6 +19,6 @@ Loading.propTypes = {
   mode: PropTypes.string,
 };
 Loading.defaultProps = {
-  mode: 'page',
+  mode: "page",
 };
 export default Loading;

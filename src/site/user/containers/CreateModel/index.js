@@ -1,26 +1,26 @@
-import PropTypes from 'prop-types';
-import React, { useState, memo, useCallback, useRef, useEffect } from 'react';
-import { Typography, Input, Col, notification } from 'antd';
-import SentimentAnalysis from 'resource/images/SentimentAnalysis.png';
-import TopicDetection from 'resource/images/TopicDetection.png';
-import MultipleTopicSentiment from 'resource/images/MultipleTopicSentiment.png';
-import RawData from 'resource/images/Raw data.png';
-import DataFormatted from 'resource/images/DataFormatted.png';
-import SentimentImage from 'resource/images/Sentiment.png';
-import TopicImage from 'resource/images/Topic.png';
-import { MainButton } from 'styles/mainStyled';
-import LoadingText from 'components/common/LoadingText';
-import { useMutation } from '@apollo/client';
-import { CREATE_MODEL } from 'graphql/Model/Mutations';
-import { ERROR_CODE } from 'resource/string';
-import { useHistory } from 'react-router-dom';
+import PropTypes from "prop-types";
+import React, { useState, memo, useCallback, useRef, useEffect } from "react";
+import { Typography, Input, Col, notification } from "antd";
+import SentimentAnalysis from "SRC/resource/images/SentimentAnalysis.png";
+import TopicDetection from "SRC/resource/images/TopicDetection.png";
+import MultipleTopicSentiment from "SRC/resource/images/MultipleTopicSentiment.png";
+import RawData from "SRC/resource/images/Raw data.png";
+import DataFormatted from "SRC/resource/images/DataFormatted.png";
+import SentimentImage from "SRC/resource/images/Sentiment.png";
+import TopicImage from "SRC/resource/images/Topic.png";
+import { MainButton } from "SRC/styles/mainStyled";
+import LoadingText from "SRC/components/common/LoadingText";
+import { useMutation } from "@apollo/client";
+import { CREATE_MODEL } from "SRC/graphql/Model/Mutations";
+import { ERROR_CODE } from "SRC/resource/string";
+import { useHistory } from "react-router-dom";
 import {
   WrapperCreateModel,
   ContainerItem,
   RowClassification,
   ContainItem,
   GroupButton,
-} from './styled';
+} from "./styled";
 
 const CreateModel = () => {
   // 1: topic
@@ -46,8 +46,8 @@ const CreateModel = () => {
     const modelDescription = refModelDescription.current.state.value;
     if (!modelName) {
       notification.error({
-        message: 'Error message',
-        description: 'Please enter model name.',
+        message: "Error message",
+        description: "Please enter model name.",
       });
       return;
     }
@@ -67,8 +67,8 @@ const CreateModel = () => {
       });
       if (res.data.createModel.statusCode === ERROR_CODE.SUCCESS) {
         notification.success({
-          message: 'Message',
-          description: 'Create new model successful.',
+          message: "Message",
+          description: "Create new model successful.",
         });
         history.push(`/model/setup/upload/${res.data.createModel.data.id}`);
       } else {
@@ -76,7 +76,7 @@ const CreateModel = () => {
       }
     } catch (err) {
       notification.error({
-        message: 'Error message',
+        message: "Error message",
         description: err.message,
       });
     }
@@ -92,9 +92,9 @@ const CreateModel = () => {
           break;
       }
     };
-    document.addEventListener('keydown', actionKey, false);
+    document.addEventListener("keydown", actionKey, false);
     return () => {
-      document.removeEventListener('keydown', actionKey, false);
+      document.removeEventListener("keydown", actionKey, false);
     };
   }, []);
 
@@ -103,7 +103,11 @@ const CreateModel = () => {
   };
   const imageTypeData =
     // eslint-disable-next-line no-nested-ternary
-    classification === 1 ? TopicImage : classification === 2 ? SentimentImage : DataFormatted;
+    classification === 1
+      ? TopicImage
+      : classification === 2
+      ? SentimentImage
+      : DataFormatted;
 
   return (
     <WrapperCreateModel>
@@ -112,7 +116,11 @@ const CreateModel = () => {
           Create new Model
         </Typography.Title>
         <TemplateContent title="At first, let naming your new Training Project">
-          <Input ref={refModelName} className="model-name" placeholder="Model name" />
+          <Input
+            ref={refModelName}
+            className="model-name"
+            placeholder="Model name"
+          />
         </TemplateContent>
         {/* Descriptions */}
         <TemplateContent title="Project Description">
@@ -178,7 +186,7 @@ const CreateModel = () => {
         <TemplateContent>
           <GroupButton>
             <MainButton type="primary" onClick={submit}>
-              {false ? <LoadingText title="Loading" /> : 'Next'}
+              {false ? <LoadingText title="Loading" /> : "Next"}
             </MainButton>
           </GroupButton>
         </TemplateContent>
@@ -206,7 +214,7 @@ TemplateContent.propTypes = {
 };
 TemplateContent.defaultProps = {
   children: null,
-  title: '',
+  title: "",
 };
 
 const Item = memo((props) => {
@@ -228,9 +236,9 @@ Item.propTypes = {
 };
 
 Item.defaultProps = {
-  mode: 'classification',
+  mode: "classification",
   onClick: () => {},
-  label: 'Default',
-  srcImage: 'asdf',
+  label: "Default",
+  srcImage: "asdf",
   active: false,
 };

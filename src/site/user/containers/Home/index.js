@@ -1,8 +1,8 @@
-import React from 'react';
-import HeaderHome from 'components/HeaderHome';
-import BodyHome from 'components/BodyHome';
-import FooterHome from 'components/FooterHome';
-import { WrapperHome } from './styled';
+import React from "react";
+import HeaderHome from "SRC/components/HeaderHome";
+import BodyHome from "SRC/components/BodyHome";
+import FooterHome from "SRC/components/FooterHome";
+import { WrapperHome } from "./styled";
 
 const HomeView = () => {
   return (

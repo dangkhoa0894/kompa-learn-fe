@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
-const colorBtnSign = '#6ac040';
+const colorBtnSign = "#6ac040";
 
 export const ContainButton = styled.div`
   display: flex;

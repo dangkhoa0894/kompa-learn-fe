@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { Row } from 'antd';
-import media from 'styles/media';
-import LogoCompany from 'resource/images/KompaLearn2.png';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { Row } from "antd";
+import media from "SRC/styles/media";
+import LogoCompany from "resource/images/KompaLearn2.png";
 
 export const LinkLogo = styled(NavLink)`
   display: flex;

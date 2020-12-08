@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
 export const ContainMenu = styled.div`
   justify-content: center;
@@ -63,7 +63,7 @@ export const ContainMenu = styled.div`
         opacity: 0;
         border-radius: 10px;
         width: 0px;
-        content: '';
+        content: "";
         background: ${({ theme: { colors } }) => colors.white.white_1};
         transition: 0.2s;
       }

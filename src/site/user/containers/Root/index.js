@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Redirect, Switch, Route, useHistory } from 'react-router-dom';
-import NavVertical from 'components/NavVertical';
-import { useQuery } from '@apollo/client';
-import { ME } from 'graphql/User/Query';
-import { ERROR_CODE } from 'resource/string';
-import { WrapperHome } from './styled';
-import Loading from '../Loading/LoadingView';
-import DashBoardView from '../Dashboard';
+import React, { useEffect } from "react";
+import { Redirect, Switch, Route, useHistory } from "react-router-dom";
+import NavVertical from "SRC/components/NavVertical";
+import { useQuery } from "@apollo/client";
+import { ME } from "SRC/graphql/User/Query";
+import { ERROR_CODE } from "SRC/resource/string";
+import { WrapperHome } from "./styled";
+import Loading from "../Loading/LoadingView";
+import DashBoardView from "../Dashboard";
 
 function HomeView() {
   const { data, loading } = useQuery(ME);
@@ -14,10 +14,10 @@ function HomeView() {
   useEffect(() => {
     if (!loading) {
       if (data?.me?.statusCode === ERROR_CODE.SUCCESS) {
-        history.push('/main/dashboard');
+        history.push("/main/dashboard");
         return;
       }
-      history.push('/login');
+      history.push("/login");
     }
   }, [loading]);
   return (

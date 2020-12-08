@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import LogoCompanyWhite from 'resource/images/KompaLearn.png';
-import LogoCompanyBlack from 'resource/images/KompaLearn2.png';
+import styled from "styled-components";
+import LogoCompanyWhite from "SRC/resource/images/KompaLearn.png";
+import LogoCompanyBlack from "SRC/resource/images/KompaLearn2.png";
 
 export const ContainCompanyName = styled.div`
   display: flex;
@@ -11,7 +11,9 @@ export const ContainCompanyName = styled.div`
     align-items: center;
     .logo {
       background-image: ${({ color }) =>
-        color === 'black' ? `url(${LogoCompanyBlack})` : `url(${LogoCompanyWhite})`};
+        color === "black"
+          ? `url(${LogoCompanyBlack})`
+          : `url(${LogoCompanyWhite})`};
       background-size: contain;
       height: 50px;
       width: 200px;

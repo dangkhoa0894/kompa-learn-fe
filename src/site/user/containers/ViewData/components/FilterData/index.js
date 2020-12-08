@@ -1,12 +1,12 @@
-import { useQuery } from '@apollo/client';
-import { Checkbox, Tooltip, Typography } from 'antd';
-import { filterDataModel } from 'graphql/Cache/initialCache';
-import { GET_DETAIL_MODEL_WITH_COUNTER_LABEL_DB } from 'graphql/Model/Query';
-import PropTypes from 'prop-types';
-import React, { memo, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import theme from 'styles/theme';
-import { WrapperFilterData } from './styled';
+import { useQuery } from "@apollo/client";
+import { Checkbox, Tooltip, Typography } from "antd";
+import { filterDataModel } from "SRC/graphql/Cache/initialCache";
+import { GET_DETAIL_MODEL_WITH_COUNTER_LABEL_DB } from "SRC/graphql/Model/Query";
+import PropTypes from "prop-types";
+import React, { memo, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import theme from "SRC/styles/theme";
+import { WrapperFilterData } from "./styled";
 
 const FilterData = (props) => {
   const { isShowFilter } = props;
@@ -39,7 +39,7 @@ const FilterData = (props) => {
               `${item.labelName} - (${item.counter})`
             ),
           value: item.id,
-        })),
+        }))
       );
     }
   }, [infoModel]);

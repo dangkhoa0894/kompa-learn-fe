@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Popover } from 'antd';
-import { FaEllipsisH } from 'react-icons/fa';
-import ModalView from 'components/common/Modal';
-import RenamePopup from 'components/RenamePopup';
-import { TiDeleteOutline } from 'react-icons/ti';
-import ContentOptions from '../OptionsAction';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Popover } from "antd";
+import { FaEllipsisH } from "react-icons/fa";
+import ModalView from "SRC/components/common/Modal";
+import RenamePopup from "SRC/components/RenamePopup";
+import { TiDeleteOutline } from "react-icons/ti";
+import ContentOptions from "../OptionsAction";
 
 const ModelAction = (props) => {
   const { process } = props;
@@ -21,7 +21,7 @@ const ModelAction = (props) => {
 
   const removeModel = (evt) => {
     evt.stopPropagation();
-    console.log('', props);
+    console.log("", props);
   };
 
   return (
@@ -30,7 +30,12 @@ const ModelAction = (props) => {
         <Popover
           getPopupContainer={(trigger) => trigger.parentElement}
           placement="leftTop"
-          content={<ContentOptions {...props} toggleOpenRename={(e) => toggleOpenRename(e)} />}
+          content={
+            <ContentOptions
+              {...props}
+              toggleOpenRename={(e) => toggleOpenRename(e)}
+            />
+          }
           trigger="click"
         >
           <div
@@ -58,7 +63,12 @@ const ModelAction = (props) => {
       )}
       <ModalView
         isOpen={isOpenRename}
-        content={<RenamePopup {...dataActive} toggleOpenRename={(e) => toggleOpenRename(e)} />}
+        content={
+          <RenamePopup
+            {...dataActive}
+            toggleOpenRename={(e) => toggleOpenRename(e)}
+          />
+        }
         onCancel={toggleOpenRename}
         destroyOnClose
         showFooter={false}

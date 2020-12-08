@@ -1,8 +1,8 @@
-import { useMutation } from '@apollo/client';
-import { CHANGE_VERSION_MODEL } from 'graphql/Model/Mutations';
-import { ERROR_CODE, _TYPENAME } from 'resource/string';
-import { useCallback } from 'react';
-import { notification } from 'antd';
+import { useMutation } from "@apollo/client";
+import { CHANGE_VERSION_MODEL } from "SRC/graphql/Model/Mutations";
+import { ERROR_CODE, _TYPENAME } from "SRC/resource/string";
+import { useCallback } from "react";
+import { notification } from "antd";
 
 export const useChangeVersion = () => {
   const [doChangeVersion, { loading }] = useMutation(CHANGE_VERSION_MODEL);
@@ -36,7 +36,7 @@ export const useChangeVersion = () => {
             });
           } catch (err) {
             notification.error({
-              message: 'Message',
+              message: "Message",
               description: err.message,
             });
           }

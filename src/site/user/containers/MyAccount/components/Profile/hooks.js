@@ -1,9 +1,9 @@
-import { UPDATE_INFO_USER } from 'graphql/User/Mutations';
-import { useMutation } from '@apollo/client';
-import { useCallback } from 'react';
-import { ERROR_CODE } from 'resource/string';
-import { GET_INFO_USER } from 'graphql/User/Query';
-import { notification } from 'antd';
+import { UPDATE_INFO_USER } from "SRC/graphql/User/Mutations";
+import { useMutation } from "@apollo/client";
+import { useCallback } from "react";
+import { ERROR_CODE } from "SRC/resource/string";
+import { GET_INFO_USER } from "SRC/graphql/User/Query";
+import { notification } from "antd";
 
 export const useUpdateInfoUser = () => {
   const [doUpdate, { loading }] = useMutation(UPDATE_INFO_USER);
@@ -36,13 +36,13 @@ export const useUpdateInfoUser = () => {
             data: {
               me: {
                 ...dataCache,
-                __typename: '__INFO_USER__',
+                __typename: "__INFO_USER__",
               },
             },
           });
           notification.success({
-            message: 'Message',
-            description: 'Update info user successful !',
+            message: "Message",
+            description: "Update info user successful !",
           });
           // }
         }

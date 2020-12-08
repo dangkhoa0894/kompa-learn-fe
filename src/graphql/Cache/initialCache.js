@@ -1,5 +1,5 @@
-import { InMemoryCache, defaultDataIdFromObject } from '@apollo/client';
-import { _TYPENAME } from 'resource/string';
+import { InMemoryCache, defaultDataIdFromObject } from "@apollo/client";
+import { _TYPENAME } from "SRC/resource/string";
 
 export const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {

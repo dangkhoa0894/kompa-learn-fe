@@ -1,17 +1,23 @@
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import { Col, Typography, Checkbox, notification } from 'antd';
-import Title from 'components/common/Title';
-import TableData from 'components/common/Table/TableData';
-import { useHistory, useParams } from 'react-router-dom';
-import { MainButton } from 'styles/mainStyled';
-import { ERROR_CODE } from 'resource/string';
-import { UPDATE_COLUMN_DATA_RAW } from 'graphql/Model/Mutations';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_TEN_COLUMN_DATA } from 'graphql/Model/Query';
-import { useGetDetailModel } from 'hooks/Model';
-import LoadingText from 'components/common/LoadingText';
-import { ContainerTable, ColCustom, TableFooterContainer, CellTable, WrapperBody } from './styled';
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { Col, Typography, Checkbox, notification } from "antd";
+import Title from "SRC/components/common/Title";
+import TableData from "SRC/components/common/Table/TableData";
+import { useHistory, useParams } from "react-router-dom";
+import { MainButton } from "SRC/styles/mainStyled";
+import { ERROR_CODE } from "SRC/resource/string";
+import { UPDATE_COLUMN_DATA_RAW } from "SRC/graphql/Model/Mutations";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_TEN_COLUMN_DATA } from "SRC/graphql/Model/Query";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import LoadingText from "SRC/components/common/LoadingText";
+import {
+  ContainerTable,
+  ColCustom,
+  TableFooterContainer,
+  CellTable,
+  WrapperBody,
+} from "./styled";
 
 function Files() {
   const history = useHistory();
@@ -28,7 +34,7 @@ function Files() {
         modelId: parseInt(modelId, 10),
       },
     },
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
   });
   const [{ data: infoModel }] = useGetDetailModel({
     model: {
@@ -36,7 +42,9 @@ function Files() {
     },
     cache: false,
   });
-  const [doUpdateColumnForData, { loading: loadingUpdate }] = useMutation(UPDATE_COLUMN_DATA_RAW);
+  const [doUpdateColumnForData, { loading: loadingUpdate }] = useMutation(
+    UPDATE_COLUMN_DATA_RAW
+  );
 
   const onCheck = (value) => {
     setColSelected(value);
@@ -57,7 +65,7 @@ function Files() {
       });
       if (res.data.updateDataModel.statusCode === ERROR_CODE.SUCCESS) {
         notification.success({
-          message: 'Message',
+          message: "Message",
           description: res.data.updateDataModel.message,
         });
         if (infoModel.typeModel === 2) {
@@ -70,7 +78,7 @@ function Files() {
       }
     } catch (err) {
       notification.error({
-        message: 'Message',
+        message: "Message",
         description: err.message,
       });
     }
@@ -122,9 +130,14 @@ function Files() {
               <div
                 key={e.dataIndex}
                 style={{ width: `${widthItem}%` }}
-                className={`item-value ${colSelected.key === e.key && 'active'}`}
+                className={`item-value ${
+                  colSelected.key === e.key && "active"
+                }`}
               >
-                <Checkbox checked={colSelected.key === e.key} onChange={() => onCheck(e)}>
+                <Checkbox
+                  checked={colSelected.key === e.key}
+                  onChange={() => onCheck(e)}
+                >
                   Use this column
                 </Checkbox>
               </div>
@@ -146,9 +159,9 @@ function Files() {
       <MainButton
         type="primary"
         onClick={!loadingUpdate && onContinue}
-        disabled={!(typeof colSelected.key === 'string')}
+        disabled={!(typeof colSelected.key === "string")}
       >
-        {loadingUpdate ? <LoadingText title="Loading..." /> : 'Continue'}
+        {loadingUpdate ? <LoadingText title="Loading..." /> : "Continue"}
       </MainButton>
     </WrapperBody>
   );

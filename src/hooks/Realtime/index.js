@@ -1,10 +1,10 @@
-import { gql, useSubscription } from '@apollo/client';
+import { gql, useSubscription } from "@apollo/client";
 import {
   SUBSCRIPTIONS_STATUS_MODEL,
   SUBSCRIPTIONS_UPLOAD_MODEL,
-} from 'graphql/Model/Subscriptions';
-import { useState } from 'react';
-import { ERROR_CODE, _TYPENAME } from 'resource/string';
+} from "SRC/graphql/Model/Subscriptions";
+import { useState } from "react";
+import { ERROR_CODE, _TYPENAME } from "SRC/resource/string";
 
 export const useUpdateModel = ({ userId }) => {
   const [modelTrain, setModelTrain] = useState({});
@@ -12,7 +12,10 @@ export const useUpdateModel = ({ userId }) => {
     variables: { userId },
     skip: !userId,
     onSubscriptionData: (res) => {
-      if (res?.subscriptionData?.data?.notifyTrain?.statusCode === ERROR_CODE.SUCCESS) {
+      if (
+        res?.subscriptionData?.data?.notifyTrain?.statusCode ===
+        ERROR_CODE.SUCCESS
+      ) {
         const receiveData = res.subscriptionData.data?.notifyTrain?.data;
         const { cache } = res.client;
         cache.modify({
@@ -64,7 +67,10 @@ export const useUploadModelSubscriptions = ({ userId }) => {
     variables: { userId },
     skip: !userId,
     onSubscriptionData: (res) => {
-      if (res?.subscriptionData?.data?.notifyUpload?.statusCode === ERROR_CODE.SUCCESS) {
+      if (
+        res?.subscriptionData?.data?.notifyUpload?.statusCode ===
+        ERROR_CODE.SUCCESS
+      ) {
         const receiveData = res.subscriptionData.data?.notifyUpload?.data;
         const { cache } = res.client;
         cache.modify({

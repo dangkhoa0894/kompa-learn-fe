@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
-import FormView from 'components/common/Form';
-import { Row, Col, Input, Modal, notification } from 'antd';
-import { CHANGE_PASSWORD } from 'graphql/User/Mutations';
-import { useMutation } from '@apollo/client';
-import { useInfoUser } from 'hooks/User';
-import { parseError } from 'utils/function';
-import { useHistory } from 'react-router-dom';
-import { ContainerChangePassword } from './styled';
+import React, { useRef, useState } from "react";
+import FormView from "SRC/components/common/Form";
+import { Row, Col, Input, Modal, notification } from "antd";
+import { CHANGE_PASSWORD } from "SRC/graphql/User/Mutations";
+import { useMutation } from "@apollo/client";
+import { useInfoUser } from "SRC/hooks/User";
+import { parseError } from "SRC/utils/function";
+import { useHistory } from "react-router-dom";
+import { ContainerChangePassword } from "./styled";
 // CHANGE_PASSWORD
 const ChangePasswordView = (props) => {
   const history = useHistory();
@@ -27,23 +27,23 @@ const ChangePasswordView = (props) => {
     })
       .then((res) => {
         Modal.success({
-          title: 'Message',
+          title: "Message",
           content: (
             <div>
               <p>{res.data.changePassword.message}</p>
             </div>
           ),
-          okText: 'Ok',
+          okText: "Ok",
           onOk() {
-            refCurrentPassword.current.state.value = '';
-            refNewPassword.current.state.value = '';
+            refCurrentPassword.current.state.value = "";
+            refNewPassword.current.state.value = "";
             history.push(`/account/my-account/profile`);
           },
         });
       })
       .catch((err) => {
         notification.error({
-          message: 'Error Message',
+          message: "Error Message",
           description: parseError(err).message,
         });
       });

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Row, Col } from 'antd';
-import media from 'styles/media';
+import styled from "styled-components";
+import { Row, Col } from "antd";
+import media from "SRC/styles/media";
 
 export const Container = styled(Row)`
   display: flex;
@@ -20,7 +20,7 @@ export const ColContent = styled(Col)`
   display: flex;
   flex-direction: column;
   ::after {
-    content: '';
+    content: "";
     position: absolute;
     top: unset;
     width: 90%;
@@ -49,7 +49,7 @@ export const ContainerTable = styled.div`
   padding: 0px 10px 10px;
   width: 100%;
   ${media.lg`
-    width: ${(props) => (props.isComponent ? '100%' : '1200px')};
+    width: ${(props) => (props.isComponent ? "100%" : "1200px")};
     height: 500px;
     `}
 `;
@@ -136,7 +136,7 @@ export const ContentTags = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: ${(props) => (props.isButton ? '345px' : '340px')};
+  height: ${(props) => (props.isButton ? "345px" : "340px")};
   input {
     border-radius: 20px;
   }
@@ -145,7 +145,7 @@ export const ContentTags = styled.div`
 export const TagItemContent = styled.div`
   display: flex;
   width: fit-content;
-  background: ${(props) => props.isModify && '#f3f6ff'};
+  background: ${(props) => props.isModify && "#f3f6ff"};
   border-radius: 5px;
   margin: 4px 0px;
   label {
@@ -176,8 +176,8 @@ export const ContentProgress = styled.div`
   justify-items: center;
 `;
 
-const positive = '#37B34A';
-const negative = '#DD4A45';
+const positive = "#37B34A";
+const negative = "#DD4A45";
 
 export const ContainSentiment = styled.div`
   display: flex;

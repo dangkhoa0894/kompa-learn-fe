@@ -1,15 +1,23 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Typography } from 'antd';
-import ImageAsset1 from 'resource/images/Asset1.png';
-import ImageAsset2 from 'resource/images/Asset2.png';
-import ImageAsset3 from 'resource/images/Asset3.png';
-import { TYPE_MODEL } from 'resource/string';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { WrapperBlockModel } from './styled';
+import PropTypes from "prop-types";
+import React from "react";
+import { Typography } from "antd";
+import ImageAsset1 from "SRC/resource/images/Asset1.png";
+import ImageAsset2 from "SRC/resource/images/Asset2.png";
+import ImageAsset3 from "SRC/resource/images/Asset3.png";
+import { TYPE_MODEL } from "SRC/resource/string";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { WrapperBlockModel } from "./styled";
 
 const BlockModel = (props) => {
-  const { loading, modelName, descriptions, score, typeModel, animation, isMoreTemplate } = props;
+  const {
+    loading,
+    modelName,
+    descriptions,
+    score,
+    typeModel,
+    animation,
+    isMoreTemplate,
+  } = props;
   return (
     <WrapperBlockModel animation={animation} isMoreTemplate={isMoreTemplate}>
       {loading ? (
@@ -20,8 +28,10 @@ const BlockModel = (props) => {
             <div className="top-bl-left">
               <div className="top-bl-left-top">{modelName}</div>
               <div className="top-bl-left-bottom">
-                Accuracy:{' '}
-                <span className="green-text">{((score[0]?.accuracy || 0) * 100).toFixed(1)} %</span>
+                Accuracy:{" "}
+                <span className="green-text">
+                  {((score[0]?.accuracy || 0) * 100).toFixed(1)} %
+                </span>
               </div>
             </div>
             <div className="top-bl-right">
@@ -31,7 +41,9 @@ const BlockModel = (props) => {
           <div className="body-block">{descriptions}</div>
           <div className="bottom-block">
             {TYPE_MODEL[typeModel - 1]?.icon}
-            <Typography.Text>{TYPE_MODEL[typeModel - 1]?.label}</Typography.Text>
+            <Typography.Text>
+              {TYPE_MODEL[typeModel - 1]?.label}
+            </Typography.Text>
           </div>
         </>
       )}
@@ -50,7 +62,7 @@ BlockModel.propTypes = {
 };
 BlockModel.defaultProps = {
   loading: true,
-  modelName: 'default',
+  modelName: "default",
   descriptions: `Don't update`,
   score: {},
   typeModel: 1,

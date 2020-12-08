@@ -1,17 +1,25 @@
-import PropTypes from 'prop-types';
-import React, { useState, memo, useCallback, useMemo, useRef } from 'react';
-import { Typography, Divider } from 'antd';
-import ItemSingle from 'components/common/ItemSingle';
-import ItemMultiple from 'components/common/ItemMultiple';
-import { RiEditLine } from 'react-icons/ri';
-import { contentModifyModel } from 'graphql/Cache/initialCache';
+import PropTypes from "prop-types";
+import React, { useState, memo, useCallback, useMemo, useRef } from "react";
+import { Typography, Divider } from "antd";
+import ItemSingle from "SRC/components/common/ItemSingle";
+import ItemMultiple from "SRC/components/common/ItemMultiple";
+import { RiEditLine } from "react-icons/ri";
+import { contentModifyModel } from "SRC/graphql/Cache/initialCache";
 
-import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
-import { useIntersectionObserverLazyContent } from 'hooks/UI';
-import { ItemContentCss, MoreTagsCss } from './styled';
+import { TiChevronLeftOutline, TiChevronRightOutline } from "react-icons/ti";
+import { useIntersectionObserverLazyContent } from "SRC/hooks/UI";
+import { ItemContentCss, MoreTagsCss } from "./styled";
 
 const ItemContent = (props) => {
-  const { content, resPredict, dataModel, index, isActive, modifyData, checkOwnerModel } = props;
+  const {
+    content,
+    resPredict,
+    dataModel,
+    index,
+    isActive,
+    modifyData,
+    checkOwnerModel,
+  } = props;
   const refItemContent = useRef(null);
   const [isShow, setIsShow] = useState(false);
   const [isShowTag, setIsShowTag] = useState(false);
@@ -25,11 +33,12 @@ const ItemContent = (props) => {
       case 1:
         // eslint-disable-next-line no-case-declarations
         let tempData = [...resPredict].sort(
-          (a, b) => parseFloat(b.confidence) - parseFloat(a.confidence),
+          (a, b) => parseFloat(b.confidence) - parseFloat(a.confidence)
         );
         // eslint-disable-next-line no-case-declarations
         const tempData2 = tempData.filter(
-          (item) => (item.confidence * 100).toFixed(2) > 0 && item.confidence !== 0,
+          (item) =>
+            (item.confidence * 100).toFixed(2) > 0 && item.confidence !== 0
         );
         tempData = isShowTag ? tempData2 : tempData2.slice(0, 6);
         return (
@@ -46,14 +55,19 @@ const ItemContent = (props) => {
               );
             })}
             {tempData2.length > 6 && (
-              <MoreTags toggleShowTagsCallback={toggleShowTagsCallback} isShowTag={isShowTagMemo} />
+              <MoreTags
+                toggleShowTagsCallback={toggleShowTagsCallback}
+                isShowTag={isShowTagMemo}
+              />
             )}
           </>
         );
       case 2:
         return resPredict.map((item, index2) => {
           // eslint-disable-next-line react/no-array-index-key
-          return <ItemSingle key={item.label + index2} {...item} mode="sentiment" />;
+          return (
+            <ItemSingle key={item.label + index2} {...item} mode="sentiment" />
+          );
         });
       case 3:
         return resPredict.map((item, index2) => {
@@ -72,7 +86,7 @@ const ItemContent = (props) => {
           modifyData &&
           modifyData.map((item, index2) => {
             const temp = {
-              label: '',
+              label: "",
             };
             if (item?.label) {
               temp.label = item.label.content;
@@ -93,18 +107,18 @@ const ItemContent = (props) => {
           modifyData &&
           modifyData.map((item, index2) => {
             const temp = {
-              label: '',
+              label: "",
             };
             if (item?.sentiment) {
               const tempSentiment = dataModel.sentiment
                 .filter(
                   (e) =>
-                    e.sentimentName === 'positive' ||
-                    e.sentimentName === 'negative' ||
-                    e.sentimentName === 'neutral',
+                    e.sentimentName === "positive" ||
+                    e.sentimentName === "negative" ||
+                    e.sentimentName === "neutral"
                 )
                 .find((e2) => e2.id === item.sentiment.id);
-              temp.label = tempSentiment.sentimentName || '';
+              temp.label = tempSentiment.sentimentName || "";
             }
             return (
               <ItemSingle
@@ -122,31 +136,35 @@ const ItemContent = (props) => {
           modifyData &&
           modifyData.map((item, index2) => {
             const temp = {
-              root_label: '',
-              child_label: '',
-              sentiment: '',
+              root_label: "",
+              child_label: "",
+              sentiment: "",
             };
             if (item?.sentiment) {
               const tempSentiment = dataModel.sentiment
                 .filter(
                   (e) =>
-                    e.sentimentName === 'positive' ||
-                    e.sentimentName === 'negative' ||
-                    e.sentimentName === 'neutral',
+                    e.sentimentName === "positive" ||
+                    e.sentimentName === "negative" ||
+                    e.sentimentName === "neutral"
                 )
                 .find((e2) => e2.id === item.sentiment.id);
-              temp.sentiment = tempSentiment.sentimentName || '';
+              temp.sentiment = tempSentiment.sentimentName || "";
             }
-            let tempItem = '';
+            let tempItem = "";
             if (item?.label) {
               tempItem = item.label.content;
-              const indexS = tempItem.indexOf('#');
+              const indexS = tempItem.indexOf("#");
               temp.root_label = tempItem.slice(0, indexS);
               temp.child_label = tempItem.slice(indexS + 1, tempItem.length);
             }
             return (
               // eslint-disable-next-line react/no-array-index-key
-              <ItemMultiple key={tempItem + index2} {...temp} viewConfidence={false} />
+              <ItemMultiple
+                key={tempItem + index2}
+                {...temp}
+                viewConfidence={false}
+              />
             );
           })
         );
@@ -170,17 +188,25 @@ const ItemContent = (props) => {
   };
 
   return (
-    <ItemContentCss isActive={isActive} onClick={activeContent} ref={refItemContent}>
+    <ItemContentCss
+      isActive={isActive}
+      onClick={activeContent}
+      ref={refItemContent}
+    >
       <div className="item-index">{index}</div>
       <div
-        className={`item-content ${isShow && 'show'}`}
+        className={`item-content ${isShow && "show"}`}
         data-content={content}
         id="lazy-content"
       />
       {content.length >= 430 && (
-        <div className="more-content" onClick={toggleShowContent} role="presentation">
+        <div
+          className="more-content"
+          onClick={toggleShowContent}
+          role="presentation"
+        >
           <Typography.Text className="button-more">
-            {isShow ? 'Show less' : 'Show more'}
+            {isShow ? "Show less" : "Show more"}
           </Typography.Text>
         </div>
       )}
@@ -212,7 +238,7 @@ ItemContent.propTypes = {
 };
 
 ItemContent.defaultProps = {
-  content: '',
+  content: "",
   resPredict: [],
   dataModel: {},
   modifyData: [],

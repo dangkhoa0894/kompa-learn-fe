@@ -1,12 +1,13 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
 export const ContainerBlock = styled.div`
   width: 100%;
   background: ${({ theme: { colors } }) => colors.white.white_1};
   border-radius: 5px;
   margin-bottom: 50px;
-  box-shadow: 0 2px 4px 0 rgba(6, 21, 33, 0.04), 0 0 2px 0 rgba(16, 25, 32, 0.03);
+  box-shadow: 0 2px 4px 0 rgba(6, 21, 33, 0.04),
+    0 0 2px 0 rgba(16, 25, 32, 0.03);
   padding: 10px;
   ${media.md`
   padding:0px;

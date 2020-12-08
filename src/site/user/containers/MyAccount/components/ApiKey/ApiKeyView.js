@@ -1,9 +1,9 @@
-import React from 'react';
-import FormView from 'components/common/Form';
-import { Row, Typography } from 'antd';
-import { MainButton } from 'styles/mainStyled';
-import { FaCreditCard } from 'react-icons/fa';
-import { ContainerApiKey, ColApi } from './styled';
+import React from "react";
+import FormView from "SRC/components/common/Form";
+import { Row, Typography } from "antd";
+import { MainButton } from "SRC/styles/mainStyled";
+import { FaCreditCard } from "react-icons/fa";
+import { ContainerApiKey, ColApi } from "./styled";
 
 const ApiKeyView = () => {
   return (
@@ -20,11 +20,7 @@ const ApiKeyView = () => {
                 fa385791d7ed579bf12a81f48f779038f1ebe7ec
               </Typography.Text>
             </div>
-            <MainButton
-              type="primary"
-              padding="0px 8px"
-              height="30px"
-            >
+            <MainButton type="primary" padding="0px 8px" height="30px">
               Revoke and re-generate
             </MainButton>
           </ColApi>

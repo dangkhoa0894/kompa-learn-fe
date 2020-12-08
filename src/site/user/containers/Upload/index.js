@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, Upload, notification, Modal } from 'antd';
-import { UPLOAD_DATA_RAW, TRAIN_DATA } from 'graphql/Model/Mutations';
-import { useMutation, useSubscription } from '@apollo/client';
-import { useParams, useHistory } from 'react-router-dom';
-import { ERROR_CODE } from 'resource/string';
-import { MainButton } from 'styles/mainStyled';
-import LoadingText from 'components/common/LoadingText';
-import ModalView from 'components/common/Modal';
-import { useGetDetailModel } from 'hooks/Model';
-import Loading3 from 'resource/images/Loading3.gif';
-import ProgressBar from 'components/ProgressBar';
-import Title from 'components/common/Title';
-import { SUBSCRIPTIONS_UPLOAD_MODEL } from 'graphql/Model/Subscriptions';
-import { useInfoUser } from 'hooks/User';
-import { UploadContainer, UploadCss, LinkCss } from './styled';
-import SuccessUpload from './components/SuccessUpload';
-import Congratulations from './components/Congratulation';
+import React, { useState, useEffect } from "react";
+import { Typography, Upload, notification, Modal } from "antd";
+import { UPLOAD_DATA_RAW, TRAIN_DATA } from "SRC/graphql/Model/Mutations";
+import { useMutation, useSubscription } from "@apollo/client";
+import { useParams, useHistory } from "react-router-dom";
+import { ERROR_CODE } from "SRC/resource/string";
+import { MainButton } from "SRC/styles/mainStyled";
+import LoadingText from "SRC/components/common/LoadingText";
+import ModalView from "SRC/components/common/Modal";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import Loading3 from "SRC/resource/images/Loading3.gif";
+import ProgressBar from "SRC/components/ProgressBar";
+import Title from "SRC/components/common/Title";
+import { SUBSCRIPTIONS_UPLOAD_MODEL } from "SRC/graphql/Model/Subscriptions";
+import { useInfoUser } from "SRC/hooks/User";
+import { UploadContainer, UploadCss, LinkCss } from "./styled";
+import SuccessUpload from "./components/SuccessUpload";
+import Congratulations from "./components/Congratulation";
 
 const UploadView = () => {
   const [doUploadFile, { loading }] = useMutation(UPLOAD_DATA_RAW);
@@ -63,13 +63,16 @@ const UploadView = () => {
       setIsSuccess(-1);
       setPercent(0);
       notification.error({
-        message: 'Error message',
+        message: "Error message",
         description: err.message,
       });
     }
   };
   useEffect(() => {
-    if (uploadModel?.notifyUpload && uploadModel.notifyUpload.statusCode === ERROR_CODE.SUCCESS) {
+    if (
+      uploadModel?.notifyUpload &&
+      uploadModel.notifyUpload.statusCode === ERROR_CODE.SUCCESS
+    ) {
       if (uploadModel.notifyUpload.data.model_id === modelId) {
         setIsSuccess(1);
       }
@@ -127,14 +130,14 @@ const UploadView = () => {
           },
         });
         if (res.data.trainModel.statusCode === ERROR_CODE.SUCCESS) {
-          history.push('/main/dashboard');
+          history.push("/main/dashboard");
         } else {
           setIsOpen(false);
           throw new Error(res.data.trainModel.message);
         }
       } catch (e) {
         Modal.error({
-          title: 'Error',
+          title: "Error",
           content: (
             <div>
               <p>{e.message}</p>
@@ -147,12 +150,12 @@ const UploadView = () => {
   };
 
   const changePage = () => {
-    history.push('/main/dashboard');
+    history.push("/main/dashboard");
   };
 
   useEffect(() => {
     if (file.type) {
-      file.status = 'done';
+      file.status = "done";
       setFile(file);
     }
   }, [file]);
@@ -216,13 +219,13 @@ const UploadView = () => {
         disabled={percent === 0}
         onClick={() => (percent !== 100 ? changePage() : setIsOpen(true))}
       >
-        {percent !== 100 ? 'Wait in Dashboard' : ' Go to Training'}
+        {percent !== 100 ? "Wait in Dashboard" : " Go to Training"}
       </MainButton>
       <ModalView
         isOpen={isOpen}
         onOk={trainModel}
         content={<Congratulations />}
-        okText={loadingTrain ? <LoadingText title="Loading" /> : 'Training'}
+        okText={loadingTrain ? <LoadingText title="Loading" /> : "Training"}
         okType="success"
         width="fit-content"
       />

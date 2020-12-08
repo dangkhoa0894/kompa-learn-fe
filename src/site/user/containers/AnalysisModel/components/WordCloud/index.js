@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Typography } from 'antd';
-// import WordCloud from 'components/common/WordCloud';
-import WordCloud from 'components/common/Chart/Am/WordCloud';
-import { WrapperWordCloud } from './styled';
+import PropTypes from "prop-types";
+import React from "react";
+import { Typography } from "antd";
+// import WordCloud from 'SRC/components/common/WordCloud';
+import WordCloud from "SRC/components/common/Chart/Am/WordCloud";
+import { WrapperWordCloud } from "./styled";
 
 const WordCloudDetailModel = (props) => {
   // eslint-disable-next-line no-unused-vars

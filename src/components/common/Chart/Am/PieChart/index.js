@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { useRef, useLayoutEffect, memo } from 'react';
-import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
+import PropTypes from "prop-types";
+import React, { useRef, useLayoutEffect, memo } from "react";
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
 // eslint-disable-next-line camelcase
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import positiveIcon from 'resource/images/positiveIcon.png';
-import negativeIcon from 'resource/images/negativeIcon.png';
-import neutralIcon from 'resource/images/neutralIcon.png';
-import theme from 'styles/theme';
-import { PieChartCss } from './styled';
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import positiveIcon from "SRC/resource/images/positiveIcon.png";
+import negativeIcon from "SRC/resource/images/negativeIcon.png";
+import neutralIcon from "SRC/resource/images/neutralIcon.png";
+import theme from "SRC/styles/theme";
+import { PieChartCss } from "./styled";
 
 const AmPieChart = (props) => {
   const { counterLabel, isIcon, legendPosition, isCustom } = props;
@@ -19,7 +19,7 @@ const AmPieChart = (props) => {
   // Add data
 
   useLayoutEffect(() => {
-    const x = am4core.create('chartdiv', am4charts.PieChart);
+    const x = am4core.create("chartdiv", am4charts.PieChart);
     // x.legend = new am4charts.Legend();
     x.seriesContainer.zIndex = 3;
 
@@ -29,15 +29,15 @@ const AmPieChart = (props) => {
     // TEXT IN PIE
     const container = new am4core.Container();
     container.parent = pieSeries;
-    container.horizontalCenter = 'middle';
-    container.verticalCenter = 'middle';
+    container.horizontalCenter = "middle";
+    container.verticalCenter = "middle";
     container.width = am4core.percent(40) / Math.sqrt(2);
-    container.fill = 'white';
+    container.fill = "white";
 
     label.parent = container;
-    label.text = 'TOTAL: {values.value.sum}';
-    label.horizontalCenter = 'middle';
-    label.verticalCenter = 'middle';
+    label.text = "TOTAL: {values.value.sum}";
+    label.horizontalCenter = "middle";
+    label.verticalCenter = "middle";
     label.fontSize = 13;
     label.zIndex = -1;
 
@@ -46,13 +46,13 @@ const AmPieChart = (props) => {
     // label.verticalCenter = 'middle';
     // label.fontSize = '1rem';
     // END TEXT
-    pieSeries.dataFields.value = 'number';
-    pieSeries.dataFields.category = 'tag';
-    pieSeries.labels.template.text = '{tag}: {value.value}';
+    pieSeries.dataFields.value = "number";
+    pieSeries.dataFields.category = "tag";
+    pieSeries.labels.template.text = "{tag}: {value.value}";
     // pieSeries.slices.template.stroke = am4core.color('#4a2abb');
     // pieSeries.slices.template.strokeWidth = 2;
     // pieSeries.slices.template.strokeOpacity = 0;
-    pieSeries.slices.template.propertyFields.fill = 'color';
+    pieSeries.slices.template.propertyFields.fill = "color";
     // START LABEL SLICE
     pieSeries.labels.template.disabled = true;
     pieSeries.ticks.template.disabled = true;
@@ -81,9 +81,9 @@ const AmPieChart = (props) => {
       const dollar = markers.template.createChild(am4core.Image);
       dollar.width = 20;
       dollar.height = 20;
-      dollar.verticalCenter = 'top';
-      dollar.horizontalCenter = 'left';
-      dollar.adapter.add('href', (href, target) => {
+      dollar.verticalCenter = "top";
+      dollar.horizontalCenter = "left";
+      dollar.adapter.add("href", (href, target) => {
         if (
           target.dataItem &&
           target.dataItem.dataContext &&
@@ -119,19 +119,19 @@ const AmPieChart = (props) => {
     x.innerRadius = am4core.percent(50);
     const temp = [
       {
-        tag: 'Positive',
+        tag: "Positive",
         number: counterLabel?.positive || 0,
         logo: positiveIcon,
         color: am4core.color(theme.colors.positive.default),
       },
       {
-        tag: 'Negative',
+        tag: "Negative",
         number: counterLabel?.negative || 0,
         logo: negativeIcon,
         color: am4core.color(theme.colors.negative.default),
       },
       {
-        tag: 'Neutral',
+        tag: "Neutral",
         number: counterLabel?.neutral || 0,
         logo: neutralIcon,
         color: am4core.color(theme.colors.neutral.default),
@@ -141,9 +141,9 @@ const AmPieChart = (props) => {
     x.data = temp;
     // EVENT RESPONSIVE TEXT IN PIE
     if (isCustom) {
-      const idLegend = document.getElementById('legend');
-      idLegend.innerHTML = '';
-      x.events.on('ready', function () {
+      const idLegend = document.getElementById("legend");
+      idLegend.innerHTML = "";
+      x.events.on("ready", function () {
         // populate our custom legend when chart renders
         pieSeries.dataItems.each(function (row) {
           //   const color = x.colors.getIndex(i);
@@ -176,7 +176,7 @@ const AmPieChart = (props) => {
       });
     }
 
-    x.events.on('sizechanged', function () {
+    x.events.on("sizechanged", function () {
       let scale = (pieSeries.pixelInnerRadius * 2) / label.bbox.width;
       if (scale > 1) {
         scale = 1;
@@ -193,7 +193,7 @@ const AmPieChart = (props) => {
 
   return (
     <PieChartCss isCustom={isCustom}>
-      <div id="chartdiv" style={{ width: '100%', height: '100%' }} />
+      <div id="chartdiv" style={{ width: "100%", height: "100%" }} />
       <div id="legend" />
     </PieChartCss>
   );
@@ -213,7 +213,7 @@ AmPieChart.propTypes = {
 AmPieChart.defaultProps = {
   counterLabel: {},
   isIcon: true,
-  legendPosition: 'left',
+  legendPosition: "left",
   isCustom: false,
 };
 

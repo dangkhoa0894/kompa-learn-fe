@@ -1,19 +1,22 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { GET_DATA_TRAIN_BY_INDEX } from 'graphql/Model/Query';
-import { ERROR_CODE } from 'resource/string';
+import React, { useEffect, useState, useCallback } from "react";
+import { GET_DATA_TRAIN_BY_INDEX } from "SRC/graphql/Model/Query";
+import { ERROR_CODE } from "SRC/resource/string";
 import {
   UPDATE_LABEL_FOR_CONTENT,
   SUBMIT_FILE_RAW,
   UPDATE_SENTIMENT_FOR_CONTENT,
   DUPLICATE_CONTENT_MODEL,
-} from 'graphql/Model/Mutations';
-import { useMutation, useLazyQuery, useSubscription } from '@apollo/client';
-import { notification } from 'antd';
-import { SUBSCRIPTIONS_UPLOAD_MODEL } from 'graphql/Model/Subscriptions';
+} from "SRC/graphql/Model/Mutations";
+import { useMutation, useLazyQuery, useSubscription } from "@apollo/client";
+import { notification } from "antd";
+import { SUBSCRIPTIONS_UPLOAD_MODEL } from "SRC/graphql/Model/Subscriptions";
 
 export const useGetDataByPage = ({ modelId }) => {
   const [data, setData] = useState({});
-  const [runQuery, { loading, data: contentData }] = useLazyQuery(GET_DATA_TRAIN_BY_INDEX, {});
+  const [runQuery, { loading, data: contentData }] = useLazyQuery(
+    GET_DATA_TRAIN_BY_INDEX,
+    {}
+  );
 
   useEffect(() => {
     if (contentData && contentData?.getDataByIndex) {
@@ -68,7 +71,7 @@ export const useUpdateLabel = () => {
             });
           } catch (e) {
             notification.error({
-              message: 'Message error ',
+              message: "Message error ",
               description: e.message,
             });
           }
@@ -111,7 +114,7 @@ export const useUpdateSentiment = () => {
             });
           } catch (e) {
             notification.error({
-              message: 'Message error ',
+              message: "Message error ",
               description: e.message,
             });
           }
@@ -169,7 +172,7 @@ export const useDuplicateContent = () => {
             });
           } catch (err) {
             notification.error({
-              message: 'Message error ',
+              message: "Message error ",
               description: err.message,
             });
           }
@@ -184,7 +187,9 @@ export const useDuplicateContent = () => {
 export const useValidateValue = () => {
   const doValidate = ({ infoModel, listTag, listSentiment }) => {
     const isCheckLabel = listTag.some(({ isChooseTag }) => isChooseTag);
-    const isCheckSentiment = listSentiment.some(({ isChooseSentiment }) => isChooseSentiment);
+    const isCheckSentiment = listSentiment.some(
+      ({ isChooseSentiment }) => isChooseSentiment
+    );
     if (infoModel.typeModel === 3 && (!isCheckLabel || !isCheckSentiment)) {
       return false;
     }
@@ -202,7 +207,7 @@ export const useNotifyUpload = (infoUser, modelId) => {
       ? { variables: { userId: parseInt(infoUser.id, 10) } }
       : {
           skip: true,
-        },
+        }
   );
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Row, Col } from 'antd';
-import media from 'styles/media';
+import styled from "styled-components";
+import { Row, Col } from "antd";
+import media from "SRC/styles/media";
 
 export const WrapperBody = styled.div`
   flex: 1;

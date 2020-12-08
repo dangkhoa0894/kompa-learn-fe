@@ -1,12 +1,20 @@
-import React, { useState, useLayoutEffect, memo } from 'react';
-import PropTypes from 'prop-types';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { GET_INFO_MODEL_CLIENT } from 'graphql/Model/Query';
-import { useQuery } from '@apollo/client';
-import { WrapperBody, ItemData, Content } from './styled';
+import React, { useState, useLayoutEffect, memo } from "react";
+import PropTypes from "prop-types";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { GET_INFO_MODEL_CLIENT } from "SRC/graphql/Model/Query";
+import { useQuery } from "@apollo/client";
+import { WrapperBody, ItemData, Content } from "./styled";
 
 const Body = (props) => {
-  const { dataPage, data, columns, pagination, sorted, loading, onClick } = props;
+  const {
+    dataPage,
+    data,
+    columns,
+    pagination,
+    sorted,
+    loading,
+    onClick,
+  } = props;
   const [dataTable, setDataTable] = useState([]);
   const { data: modelView } = useQuery(GET_INFO_MODEL_CLIENT);
   useLayoutEffect(() => {
@@ -31,7 +39,7 @@ const Body = (props) => {
       }
       tempData = tempData.slice(
         pagination.page * pagination.size - pagination.size,
-        pagination.page * pagination.size,
+        pagination.page * pagination.size
       );
       setDataTable(tempData);
     } else {
@@ -60,7 +68,9 @@ const Body = (props) => {
               {columns.map((item2) => {
                 return (
                   <Content key={item2.dataIndex + item.key} {...item2}>
-                    {item2.render ? item2.render(item, item2) : item[item2.dataIndex]}
+                    {item2.render
+                      ? item2.render(item, item2)
+                      : item[item2.dataIndex]}
                   </Content>
                 );
               })}

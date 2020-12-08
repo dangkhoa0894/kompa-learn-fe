@@ -1,14 +1,14 @@
-import React from 'react';
-import { Typography, Button } from 'antd';
-import { useHistory } from 'react-router-dom';
-import emptyImage from 'resource/images/noData.png';
-import { EmptyDataStyled } from './styled';
+import React from "react";
+import { Typography, Button } from "antd";
+import { useHistory } from "react-router-dom";
+import emptyImage from "SRC/resource/images/noData.png";
+import { EmptyDataStyled } from "./styled";
 
 const EmptyData = (props) => {
   const history = useHistory();
 
   const createModel = () => {
-    history.push('/model/create');
+    history.push("/model/create");
   };
 
   return (

@@ -1,8 +1,8 @@
-import { Tooltip, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
-import theme from 'styles/theme';
-import PropTypes from 'prop-types';
-import { WrapperStackedBar, StackedBarContainer } from './styled';
+import { Tooltip, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import theme from "SRC/styles/theme";
+import PropTypes from "prop-types";
+import { WrapperStackedBar, StackedBarContainer } from "./styled";
 
 const StackedBarChart = (props) => {
   const { dataChart } = props;
@@ -12,7 +12,9 @@ const StackedBarChart = (props) => {
     let max = 0;
     dataChart.forEach((item) => {
       // eslint-disable-next-line no-return-assign
-      const tempMax = Object.values(item.data).reduce((sum, currentSum) => (sum += currentSum));
+      const tempMax = Object.values(item.data).reduce(
+        (sum, currentSum) => (sum += currentSum)
+      );
       if (tempMax > max) {
         max = tempMax;
       }
@@ -25,7 +27,9 @@ const StackedBarChart = (props) => {
       {dataChart.map((item) => {
         return (
           <div key={item.name} className="stacked-item">
-            <Typography.Text className="stacked-title">{item.name}</Typography.Text>
+            <Typography.Text className="stacked-title">
+              {item.name}
+            </Typography.Text>
             <StackedBar data={item.data} name={item.name} maxSum={maxNumber} />
           </div>
         );
@@ -121,5 +125,5 @@ StackedBar.defaultProps = {
     positive: 0,
   },
   maxSum: 0,
-  name: '',
+  name: "",
 };

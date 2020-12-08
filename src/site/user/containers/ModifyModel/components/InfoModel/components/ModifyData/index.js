@@ -1,9 +1,9 @@
-import React, { useMemo, memo, useEffect } from 'react';
-import { useGetDataModifyCache, useGetDetailModel } from 'hooks/Model';
-import { useParams } from 'react-router-dom';
-import { contentModifyModel } from 'graphql/Cache/initialCache';
-import { ModifyDataWrapper } from './styled';
-import ItemModify from './components/ItemModify';
+import React, { useMemo, memo, useEffect } from "react";
+import { useGetDataModifyCache, useGetDetailModel } from "SRC/hooks/Model";
+import { useParams } from "react-router-dom";
+import { contentModifyModel } from "SRC/graphql/Cache/initialCache";
+import { ModifyDataWrapper } from "./styled";
+import ItemModify from "./components/ItemModify";
 
 const ModifyDataView = () => {
   const { modelId } = useParams();
@@ -21,24 +21,26 @@ const ModifyDataView = () => {
 
   useEffect(() => {
     contentModifyModel({
-      contentActive: '',
-      data: '',
+      contentActive: "",
+      data: "",
     });
   }, []);
 
-  const dataModifyMemo = useMemo(() => contentModify.data, [contentModify.data]);
+  const dataModifyMemo = useMemo(() => contentModify.data, [
+    contentModify.data,
+  ]);
   const isNew = useMemo(() => true);
 
   const headerTable = useMemo(() => {
     switch (dataModel.typeModel) {
       case 1:
-        return ['Topic'];
+        return ["Topic"];
       case 2:
-        return ['Sentiment'];
+        return ["Sentiment"];
       case 3:
-        return ['Sentiment', 'Topic'];
+        return ["Sentiment", "Topic"];
       default:
-        return ['Sentiment', 'Topic'];
+        return ["Sentiment", "Topic"];
     }
   }, [dataModel.typeModel]);
   const { contentActive, data } = contentModify;

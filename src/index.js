@@ -9,8 +9,9 @@ import { split, from } from "apollo-link";
 import apolloUploadClient from "apollo-upload-client";
 import { onError } from "apollo-link-error";
 import { WebSocketLink } from "@apollo/link-ws";
-import { resolvers } from "graphql/Resolve/config";
-import { cache } from "graphql/Cache/initialCache";
+
+import { resolvers } from "SRC/graphql/Resolve/config";
+import { cache } from "SRC/graphql/Cache/initialCache";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";

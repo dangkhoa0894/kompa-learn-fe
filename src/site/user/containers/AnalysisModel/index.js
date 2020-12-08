@@ -1,14 +1,14 @@
-import { Col, Typography } from 'antd';
-import InfoModel from 'components/InfoModel';
-import { useGetDetailModel } from 'hooks/Model';
-import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Col, Typography } from "antd";
+import InfoModel from "SRC/components/InfoModel";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import React, { useMemo } from "react";
+import { useParams } from "react-router-dom";
 
-import { RowContent, WrapperAnalysis } from './styled';
-import ChartTags from './components/ChartTags';
-import MetricsChart from './components/MetricsChart';
-import PredictView from './components/Predict';
-import WordCloudDetailModel from './components/WordCloud';
+import { RowContent, WrapperAnalysis } from "./styled";
+import ChartTags from "./components/ChartTags";
+import MetricsChart from "./components/MetricsChart";
+import PredictView from "./components/Predict";
+import WordCloudDetailModel from "./components/WordCloud";
 
 const AnalysisModel = () => {
   const { modelId } = useParams();
@@ -26,7 +26,12 @@ const AnalysisModel = () => {
         <Typography.Title level={3}>{dataModel.modelName}</Typography.Title>
       </div>
       <RowContent>
-        <Col xl={{ span: 7 }} xs={{ span: 24 }} md={{ span: 12 }} className="col-first">
+        <Col
+          xl={{ span: 7 }}
+          xs={{ span: 24 }}
+          md={{ span: 12 }}
+          className="col-first"
+        >
           <InfoModel dataModel={dataMemo} />
         </Col>
         <Col xl={{ span: 7 }} xs={{ span: 24 }} md={{ span: 12 }}>

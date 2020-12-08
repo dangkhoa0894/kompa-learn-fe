@@ -1,7 +1,7 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { FaGrinWink, FaFrown } from 'react-icons/fa';
-import { BsChatDots } from 'react-icons/bs';
-import { contentModifyModel } from 'graphql/Cache/initialCache';
+import React, { useCallback, useState, useEffect } from "react";
+import { FaGrinWink, FaFrown } from "react-icons/fa";
+import { BsChatDots } from "react-icons/bs";
+import { contentModifyModel } from "SRC/graphql/Cache/initialCache";
 
 export const useModifySentiment = (props) => {
   const { dataModel, modifyData, content, isNew, contentActive } = props;
@@ -71,7 +71,9 @@ export const useModifySentiment = (props) => {
       const tempDataCache = modifyData[contentActive?.id];
       const modifyItem = tempDataCache.find((e) => e.id === content.id);
       if (modifyItem?.sentiment?.id) {
-        setSentimentActive(sentimentData.find((e) => e.id === modifyItem.sentiment.id));
+        setSentimentActive(
+          sentimentData.find((e) => e.id === modifyItem.sentiment.id)
+        );
       }
     } else {
       setSentimentActive({});
@@ -83,38 +85,38 @@ export const useModifySentiment = (props) => {
       const tempSentiment = dataModel?.sentiment
         .filter(
           (e) =>
-            e.sentimentName === 'positive' ||
-            e.sentimentName === 'negative' ||
-            e.sentimentName === 'neutral',
+            e.sentimentName === "positive" ||
+            e.sentimentName === "negative" ||
+            e.sentimentName === "neutral"
         )
         .map((item) => {
           switch (item.sentimentName) {
-            case 'positive':
+            case "positive":
               return {
                 id: item.id,
                 icon: <FaGrinWink />,
-                class: 'positive',
+                class: "positive",
                 index: 1,
               };
-            case 'negative':
+            case "negative":
               return {
                 id: item.id,
                 icon: <FaFrown />,
-                class: 'negative',
+                class: "negative",
                 index: 2,
               };
-            case 'neutral':
+            case "neutral":
               return {
                 id: item.id,
                 icon: <BsChatDots />,
-                class: 'neutral',
+                class: "neutral",
                 index: 3,
               };
             default:
               return {
                 id: item.id,
                 icon: <FaGrinWink />,
-                class: 'positive',
+                class: "positive",
                 index: 1,
               };
           }
@@ -122,5 +124,8 @@ export const useModifySentiment = (props) => {
       setSentimentData(tempSentiment.sort((a, b) => a.index - b.index));
     }
   }, [dataModel]);
-  return [{ sentimentData, sentimentActive }, useCallback((e) => updateSentiment(e))];
+  return [
+    { sentimentData, sentimentActive },
+    useCallback((e) => updateSentiment(e)),
+  ];
 };

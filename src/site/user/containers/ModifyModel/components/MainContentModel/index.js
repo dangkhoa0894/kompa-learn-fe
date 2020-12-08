@@ -1,19 +1,25 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState, memo, useCallback, useMemo } from 'react';
-import { Typography, Modal } from 'antd';
-import { PREDICT_ALL, GET_ACTIVE_MODIFY_MODEL } from 'graphql/Model/Query';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { useParams, useHistory } from 'react-router-dom';
-import { useGetDetailModel, useGetDataModifyCache } from 'hooks/Model';
-import LoadingBlock from 'components/common/LoadingBlock';
-import { ERROR_CODE } from 'resource/string';
-import { RiArrowDropRightLine } from 'react-icons/ri';
-import ButtonMenu from 'components/common/ButtonMenu';
-import { MainContentWrapper } from './styled';
-import ItemContent from './components/ItemContent';
+import PropTypes from "prop-types";
+import React, { useEffect, useState, memo, useCallback, useMemo } from "react";
+import { Typography, Modal } from "antd";
+import { PREDICT_ALL, GET_ACTIVE_MODIFY_MODEL } from "SRC/graphql/Model/Query";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { useParams, useHistory } from "react-router-dom";
+import { useGetDetailModel, useGetDataModifyCache } from "SRC/hooks/Model";
+import LoadingBlock from "SRC/components/common/LoadingBlock";
+import { ERROR_CODE } from "SRC/resource/string";
+import { RiArrowDropRightLine } from "react-icons/ri";
+import ButtonMenu from "SRC/components/common/ButtonMenu";
+import { MainContentWrapper } from "./styled";
+import ItemContent from "./components/ItemContent";
 
 const MainContentModel = (props) => {
-  const { toggleShowFilter, isShowFilter, changeStatusFetch, isFetch, checkOwnerModel } = props;
+  const {
+    toggleShowFilter,
+    isShowFilter,
+    changeStatusFetch,
+    isFetch,
+    checkOwnerModel,
+  } = props;
   const { modelId } = useParams();
   const [{ data: infoModel }] = useGetDetailModel({
     model: {
@@ -26,10 +32,14 @@ const MainContentModel = (props) => {
   return (
     <MainContentWrapper>
       <div className="main-title">
-        <ButtonMenu role="presentation" onClick={toggleShowFilter} isOpen={isShowFilter} />
+        <ButtonMenu
+          role="presentation"
+          onClick={toggleShowFilter}
+          isOpen={isShowFilter}
+        />
         <Typography.Title level={4} className="top-title">
-          <span className="span-top-title"> My Training Dashboard</span> <RiArrowDropRightLine />{' '}
-          {infoModel.modelName}
+          <span className="span-top-title"> My Training Dashboard</span>{" "}
+          <RiArrowDropRightLine /> {infoModel.modelName}
         </Typography.Title>
       </div>
       <ListContent
@@ -63,8 +73,11 @@ const ListContent = memo((props) => {
   const history = useHistory();
   const { changeStatusFetch, isFetch, checkOwnerModel } = props;
   const { modelId } = useParams();
-  const [doRefresh, { loading: loadingPredict, data: dataPredict }] = useLazyQuery(PREDICT_ALL, {
-    fetchPolicy: 'network-only',
+  const [
+    doRefresh,
+    { loading: loadingPredict, data: dataPredict },
+  ] = useLazyQuery(PREDICT_ALL, {
+    fetchPolicy: "network-only",
   });
   const [{ data }] = useGetDetailModel({
     model: {
@@ -103,16 +116,16 @@ const ListContent = memo((props) => {
       changeStatusFetch(false);
     } else if (dataPredict?.predictAll?.statusCode === 400) {
       Modal.error({
-        title: 'Error Message',
+        title: "Error Message",
         content: (
           <div>
             <p>{dataPredict?.predictAll?.message}</p>
           </div>
         ),
-        okText: 'Back to DashBoard',
-        okButtonProps: { type: 'danger' },
+        okText: "Back to DashBoard",
+        okButtonProps: { type: "danger" },
         onOk() {
-          history.push('/main/dashBoard');
+          history.push("/main/dashBoard");
         },
       });
     }
@@ -146,14 +159,14 @@ const ListContent = memo((props) => {
       }
       return false;
     },
-    [contentModify.contentActive],
+    [contentModify.contentActive]
   );
   const dataModifyModel = useCallback(
     (e) => {
       if (modifyData[e.id]) return [...modifyData[e.id]];
       return false;
     },
-    [modifyData],
+    [modifyData]
   );
 
   return (

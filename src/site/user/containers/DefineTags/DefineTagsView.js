@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { Col, notification, Typography } from 'antd';
-import { FaTimes } from 'react-icons/fa';
-import { ERROR_CODE } from 'resource/string';
-import { useGetDetailModel } from 'hooks/Model';
+import React, { useRef, useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { Col, notification, Typography } from "antd";
+import { FaTimes } from "react-icons/fa";
+import { ERROR_CODE } from "SRC/resource/string";
+import { useGetDetailModel } from "SRC/hooks/Model";
 
-import LoadingText from 'components/common/LoadingText';
+import LoadingText from "SRC/components/common/LoadingText";
 
 import {
   IconAddTag,
@@ -16,10 +16,10 @@ import {
   ContentListTags,
   Tag,
   ContentButton,
-} from './styled';
-import Title from '../../../../components/common/Title';
-import { MainButton } from '../../../../styles/mainStyled';
-import { useCreateLabel } from './hooks';
+} from "./styled";
+import Title from "SRC/components/common/Title";
+import { MainButton } from "SRC/styles/mainStyled";
+import { useCreateLabel } from "./hooks";
 
 function DefineTagsView() {
   const { modelId } = useParams();
@@ -39,16 +39,16 @@ function DefineTagsView() {
     const inputValue = inputRef.current.state.value;
     if (!inputValue) {
       notification.error({
-        message: 'Error message',
-        description: 'Please enter your tag',
+        message: "Error message",
+        description: "Please enter your tag",
       });
       return;
     }
     const hasItem = listTags.some((e) => e.tag === inputValue);
     if (hasItem) {
       notification.error({
-        message: 'Error message',
-        description: 'Your tag already exists',
+        message: "Error message",
+        description: "Your tag already exists",
       });
     } else {
       const param = {
@@ -56,7 +56,7 @@ function DefineTagsView() {
         id: new Date().valueOf(),
       };
       setListTags([...listTags, param]);
-      inputRef.current.state.value = '';
+      inputRef.current.state.value = "";
     }
   };
 
@@ -77,7 +77,7 @@ function DefineTagsView() {
     setListTags(checkExitItem);
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       addTag();
     }
   };
@@ -91,8 +91,8 @@ function DefineTagsView() {
       const updateLabel = await doCreateLabel(data);
       if (updateLabel.data.updateLabelModel.statusCode === ERROR_CODE.SUCCESS) {
         notification.success({
-          message: 'Success Message',
-          description: 'Created labels successful !',
+          message: "Success Message",
+          description: "Created labels successful !",
         });
         history.push(`/model/setup/train/${modelId}`);
       } else {
@@ -100,7 +100,7 @@ function DefineTagsView() {
       }
     } catch (err) {
       notification.error({
-        message: 'Error message',
+        message: "Error message",
         description: err.message,
       });
     }
@@ -114,7 +114,11 @@ function DefineTagsView() {
       />
       <ContentInput justify="center" align="middle">
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
-          <InputTag placeholder="Enter Tag Name" ref={inputRef} onKeyUp={handleKeyDown} />
+          <InputTag
+            placeholder="Enter Tag Name"
+            ref={inputRef}
+            onKeyUp={handleKeyDown}
+          />
           <IconGroup>
             <IconAddTag onClick={addTag} />
           </IconGroup>
@@ -133,8 +137,12 @@ function DefineTagsView() {
         </Col>
       </ContentListTags>
       <ContentButton justify="center" align="middle">
-        <MainButton type="primary" disabled={!(listTags.length > 1)} onClick={!loading && nextStep}>
-          {loading ? <LoadingText title="Loading..." /> : 'GO TO TRAINING'}
+        <MainButton
+          type="primary"
+          disabled={!(listTags.length > 1)}
+          onClick={!loading && nextStep}
+        >
+          {loading ? <LoadingText title="Loading..." /> : "GO TO TRAINING"}
         </MainButton>
       </ContentButton>
     </Container>

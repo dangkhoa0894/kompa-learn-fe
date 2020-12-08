@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { useState, memo } from 'react';
-import { Button, notification, Typography } from 'antd';
-import PredictPopup from 'components/PredictPopup';
-import ModalView from 'components/common/Modal';
-import { useMutation } from '@apollo/client';
-import { MODIFY_CONTENT_MODEL } from 'graphql/Model/Mutations';
-import { useHistory, useParams } from 'react-router-dom';
-import { ERROR_CODE } from 'resource/string';
-import { useGetDataModifyCache } from 'hooks/Model';
-import { TryPredictContainer, ContentTrainCss } from './styled';
+import PropTypes from "prop-types";
+import React, { useState, memo } from "react";
+import { Button, notification, Typography } from "antd";
+import PredictPopup from "SRC/components/PredictPopup";
+import ModalView from "SRC/components/common/Modal";
+import { useMutation } from "@apollo/client";
+import { MODIFY_CONTENT_MODEL } from "SRC/graphql/Model/Mutations";
+import { useHistory, useParams } from "react-router-dom";
+import { ERROR_CODE } from "SRC/resource/string";
+import { useGetDataModifyCache } from "SRC/hooks/Model";
+import { TryPredictContainer, ContentTrainCss } from "./styled";
 
 const TryPredict = () => {
   const [isOpenPredict, setIsOpenPredict] = useState(false);
@@ -52,7 +52,7 @@ const ButtonTrain = () => {
 
   const handleSubmit = async () => {
     try {
-      history.push('/main/dashboard');
+      history.push("/main/dashboard");
       const res = await doModifyModel({
         variables: {
           dataInput: {
@@ -63,23 +63,32 @@ const ButtonTrain = () => {
       });
       if (res?.data?.modifyModel?.statusCode === ERROR_CODE.SUCCESS) {
         notification.warning({
-          message: 'Message ',
-          description: 'Waiting for upload new Data ',
+          message: "Message ",
+          description: "Waiting for upload new Data ",
         });
       } else {
-        throw new Error('Have a problem in update tag content, please try again.');
+        throw new Error(
+          "Have a problem in update tag content, please try again."
+        );
       }
     } catch (e) {
       notification.error({
-        message: 'Message error ',
+        message: "Message error ",
         description: e.message,
       });
     }
   };
-  const sum = Object.values(dataCache?.data || {}).filter((e) => e?.length > 0).length || 0;
+  const sum =
+    Object.values(dataCache?.data || {}).filter((e) => e?.length > 0).length ||
+    0;
   return (
     <>
-      <Button color="default" disabled={sum === 0} className="btn-train" onClick={togglePreTrain}>
+      <Button
+        color="default"
+        disabled={sum === 0}
+        className="btn-train"
+        onClick={togglePreTrain}
+      >
         Train
         <span className="sum-modify-model">{sum}</span>
       </Button>
@@ -89,7 +98,7 @@ const ButtonTrain = () => {
         onCancel={togglePreTrain}
         destroyOnClose
         onOk={handleSubmit}
-        okText={loading ? 'Uploading...' : 'TRAIN '}
+        okText={loading ? "Uploading..." : "TRAIN "}
         cancelText="CANCEL"
         width="fit-content"
         centered
@@ -107,7 +116,8 @@ const ContentTrainAgain = (props) => {
         Train
       </Typography.Title>
       <Typography.Text>
-        Are you sure to train all data again with &nbsp;{sum}&nbsp; content modify?
+        Are you sure to train all data again with &nbsp;{sum}&nbsp; content
+        modify?
       </Typography.Text>
     </ContentTrainCss>
   );

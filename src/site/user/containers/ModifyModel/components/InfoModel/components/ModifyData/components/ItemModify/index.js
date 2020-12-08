@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { memo } from 'react';
-import { BiMinusCircle } from 'react-icons/bi';
-import SentimentInput from 'components/SentimentInput';
-import LabelAutoComplete from 'components/LabelAutoComplete';
-import { ItemModifyCss } from './styled';
-import { useModifyModel } from './hooks';
+import PropTypes from "prop-types";
+import React, { memo } from "react";
+import { BiMinusCircle } from "react-icons/bi";
+import SentimentInput from "SRC/components/SentimentInput";
+import LabelAutoComplete from "SRC/components/LabelAutoComplete";
+import { ItemModifyCss } from "./styled";
+import { useModifyModel } from "./hooks";
 
 const ItemModify = (props) => {
   const { dataModel } = props;

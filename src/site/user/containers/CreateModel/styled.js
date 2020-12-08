@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { Row } from 'antd';
-import media from 'styles/media';
+import styled, { css } from "styled-components";
+import { Row } from "antd";
+import media from "SRC/styles/media";
 
 export const WrapperCreateModel = styled.div`
   width: 100%;
@@ -99,8 +99,8 @@ export const ContainItem = styled.div`
 
   ${media.xs`
     img{
-        height: ${({ mode }) => (mode === 'type-data' ? '165px' : '90px')};
-        width: ${({ mode }) => (mode === 'type-data' ? '230px' : 'unset')};
+        height: ${({ mode }) => (mode === "type-data" ? "165px" : "90px")};
+        width: ${({ mode }) => (mode === "type-data" ? "230px" : "unset")};
     }
   `}
 `;

@@ -1,5 +1,5 @@
-import { css } from 'styled-components';
-import { breakpoints } from 'resource/string';
+import { css } from "styled-components";
+import { breakpoints } from "SRC/resource/string";
 
 const media = Object.keys(breakpoints).reduce((accumulator, label) => {
   accumulator[label] = (...args) => css`

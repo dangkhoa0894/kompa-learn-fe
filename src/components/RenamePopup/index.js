@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
-import { Typography, Input, Button, notification } from 'antd';
-import { RENAME_MODEL } from 'graphql/Model/Mutations';
-import { useMutation } from '@apollo/client';
-import { ERROR_CODE, _TYPENAME } from 'resource/string';
-import { ContainerRename } from './styled';
+import PropTypes from "prop-types";
+import React, { useRef } from "react";
+import { Typography, Input, Button, notification } from "antd";
+import { RENAME_MODEL } from "SRC/graphql/Model/Mutations";
+import { useMutation } from "@apollo/client";
+import { ERROR_CODE, _TYPENAME } from "SRC/resource/string";
+import { ContainerRename } from "./styled";
 
 const RenamePopup = (props) => {
   const [doUpdateName] = useMutation(RENAME_MODEL);
@@ -16,10 +16,10 @@ const RenamePopup = (props) => {
 
   const doUpdate = () => {
     const { value } = refNameModel.current.state;
-    if (value === '') {
+    if (value === "") {
       notification.error({
-        message: 'Error message',
-        description: 'Invalid model name !',
+        message: "Error message",
+        description: "Invalid model name !",
       });
       return;
     }
@@ -42,8 +42,8 @@ const RenamePopup = (props) => {
               },
             });
             notification.success({
-              message: 'Message',
-              description: 'Update model name successful',
+              message: "Message",
+              description: "Update model name successful",
             });
             toggleOpenRename({});
           } else {
@@ -51,7 +51,7 @@ const RenamePopup = (props) => {
           }
         } catch (e) {
           notification.error({
-            message: 'Error message',
+            message: "Error message",
             description: e.message,
           });
         }
@@ -59,7 +59,7 @@ const RenamePopup = (props) => {
     });
   };
   const handleUp = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       doUpdate();
     }
   };
@@ -75,10 +75,18 @@ const RenamePopup = (props) => {
       />
       <div className="group-btn">
         <div>
-          <Button color="dashed" className="btn-rename cancel" onClick={onCancel}>
+          <Button
+            color="dashed"
+            className="btn-rename cancel"
+            onClick={onCancel}
+          >
             Cancel
           </Button>
-          <Button color="primary" className="btn-rename update" onClick={doUpdate}>
+          <Button
+            color="primary"
+            className="btn-rename update"
+            onClick={doUpdate}
+          >
             Update
           </Button>
         </div>
@@ -93,7 +101,7 @@ RenamePopup.propTypes = {
   toggleOpenRename: PropTypes.func,
 };
 RenamePopup.defaultProps = {
-  modelName: '',
+  modelName: "",
   id: 0,
   toggleOpenRename: () => {},
 };

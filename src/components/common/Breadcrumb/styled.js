@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { URL } from 'resource/string';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { URL } from "SRC/resource/string";
 
 export const LinkLogo = styled(NavLink)`
   background-image: url(${URL.LOGO_COMPANY});

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
-const withDesktop = '1200px';
+const withDesktop = "1200px";
 export const WrapperBodyHome = styled.div`
   display: flex;
   flex: 1;

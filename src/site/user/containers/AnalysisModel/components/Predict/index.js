@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Typography } from 'antd';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { GET_PREDICT_BY_PAGE } from 'graphql/Model/Query';
-import { useLazyQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import ItemData from 'components/ItemPredict';
-import { ERROR_CODE } from 'resource/string';
-import { WrapperPredict } from './styled';
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { Typography } from "antd";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { GET_PREDICT_BY_PAGE } from "SRC/graphql/Model/Query";
+import { useLazyQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import ItemData from "SRC/components/ItemPredict";
+import { ERROR_CODE } from "SRC/resource/string";
+import { WrapperPredict } from "./styled";
 
 const PredictView = (props) => {
   const {
@@ -16,9 +16,12 @@ const PredictView = (props) => {
   } = props;
   const { modelId } = useParams();
   const [page, setPage] = useState(0);
-  const [doRefresh, { loading: loadingPredict, data }] = useLazyQuery(GET_PREDICT_BY_PAGE, {
-    // fetchPolicy: 'network-only',
-  });
+  const [doRefresh, { loading: loadingPredict, data }] = useLazyQuery(
+    GET_PREDICT_BY_PAGE,
+    {
+      // fetchPolicy: 'network-only',
+    }
+  );
   const [dataPredict, setDataPredict] = useState([]);
 
   const fetchDataPredict = () => {
@@ -37,7 +40,10 @@ const PredictView = (props) => {
   }, [page]);
 
   useEffect(() => {
-    if (data?.predictByPage && data.predictByPage.statusCode === ERROR_CODE.SUCCESS) {
+    if (
+      data?.predictByPage &&
+      data.predictByPage.statusCode === ERROR_CODE.SUCCESS
+    ) {
       setDataPredict(data.predictByPage.data || []);
     }
   }, [data]);
@@ -68,7 +74,13 @@ const PredictView = (props) => {
               {dataPredict &&
                 dataPredict.length > 0 &&
                 dataPredict.map((item) => {
-                  return <ItemData dataModel={props.dataModel} key={item.id} {...item} />;
+                  return (
+                    <ItemData
+                      dataModel={props.dataModel}
+                      key={item.id}
+                      {...item}
+                    />
+                  );
                 })}
             </>
           )}
@@ -76,7 +88,8 @@ const PredictView = (props) => {
       </div>
       <div className="button-predict">
         <div className="pagination">
-          {page * 5} - {(page + 1) * 5} <span className="pagination-total"> of {totalRows}</span>
+          {page * 5} - {(page + 1) * 5}{" "}
+          <span className="pagination-total"> of {totalRows}</span>
         </div>
         <div className="button">
           <IoIosArrowBack onClick={backPredict} />

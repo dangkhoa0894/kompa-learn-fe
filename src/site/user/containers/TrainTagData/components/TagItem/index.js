@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useState, useEffect } from 'react';
-import { Typography, Checkbox, Input, Alert } from 'antd';
-import ModalView from 'components/common/Modal';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import { Typography, Checkbox, Input, Alert } from "antd";
+import ModalView from "SRC/components/common/Modal";
+import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { CloseOutlined } from '@ant-design/icons';
-import { InputTag, TagItemContent } from './styled';
+import { CloseOutlined } from "@ant-design/icons";
+import { InputTag, TagItemContent } from "./styled";
 
 export const TagItem = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -30,7 +30,11 @@ export const TagItem = (props) => {
   };
   return (
     <TagItemContent isModify={isChooseTag}>
-      <Checkbox checked={isChooseTag} disabled={isModify} onChange={() => onChoose()}>
+      <Checkbox
+        checked={isChooseTag}
+        disabled={isModify}
+        onChange={() => onChoose()}
+      >
         <InputTag>
           {!isModify ? (
             <Typography.Text>{data?.labelName}</Typography.Text>

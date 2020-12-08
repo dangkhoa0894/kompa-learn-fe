@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Col } from 'antd';
-import media from 'styles/media';
+import styled from "styled-components";
+import { Col } from "antd";
+import media from "SRC/styles/media";
 
 export const ContainerBlock = styled.div`
   width: 100%;

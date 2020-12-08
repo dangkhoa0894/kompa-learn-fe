@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetDetailModel } from 'hooks/Model';
-import BodyBackground from 'components/common/BodyBackground';
-import VersionModel from './components/Version';
-import Config from './components/Config';
-import { WrapperSetting } from './styled';
-import Loading from '../Loading/LoadingView';
+import React, { memo } from "react";
+import { useParams } from "react-router-dom";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import BodyBackground from "SRC/components/common/BodyBackground";
+import VersionModel from "./components/Version";
+import Config from "./components/Config";
+import { WrapperSetting } from "./styled";
+import Loading from "../Loading/LoadingView";
 
 const SettingView = () => {
   const params = useParams();

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { Row, Input } from 'antd';
-import media from 'styles/media';
-import { FaPlus } from 'react-icons/fa';
+import styled from "styled-components";
+import { Row, Input } from "antd";
+import media from "SRC/styles/media";
+import { FaPlus } from "react-icons/fa";
 
 export const Container = styled.div``;
 

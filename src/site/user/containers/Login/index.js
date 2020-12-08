@@ -1,25 +1,25 @@
-import React, { useRef, useState } from 'react';
-import { Typography, Button } from 'antd';
-import InputN from 'components/common/Input';
-import CompanyName from 'components/common/CompanyName';
-import { useMutation } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
-import { LOGIN } from 'graphql/User/Mutations';
-import { storageCode, ERROR_CODE } from 'resource/string';
-import { WrapperLogin } from './styled';
+import React, { useRef, useState } from "react";
+import { Typography, Button } from "antd";
+import InputN from "SRC/components/common/Input";
+import CompanyName from "SRC/components/common/CompanyName";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
+import { LOGIN } from "SRC/graphql/User/Mutations";
+import { storageCode, ERROR_CODE } from "SRC/resource/string";
+import { WrapperLogin } from "./styled";
 
 const LoginView = () => {
   const history = useHistory();
   const [doLogin] = useMutation(LOGIN);
   const refUserName = useRef(null);
   const refPassword = useRef(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onLogin = () => {
     const useName = refUserName.current.value.trim();
     const password = refPassword.current.value.trim();
     if (!useName || !password) {
-      setErrorMessage('Please enter useName, password !');
+      setErrorMessage("Please enter useName, password !");
       return;
     }
     doLogin({
@@ -32,10 +32,13 @@ const LoginView = () => {
     })
       .then((res) => {
         if (res.data.login.statusCode === ERROR_CODE.SUCCESS) {
-          localStorage.setItem('token', res.data.login.token);
-          localStorage.setItem('refreshToken', res.data.login.refreshToken);
-          localStorage.setItem(storageCode.DATA_USER, JSON.stringify(res.data.login.user));
-          history.push('/main/dashboard');
+          localStorage.setItem("token", res.data.login.token);
+          localStorage.setItem("refreshToken", res.data.login.refreshToken);
+          localStorage.setItem(
+            storageCode.DATA_USER,
+            JSON.stringify(res.data.login.user)
+          );
+          history.push("/main/dashboard");
         } else {
           setErrorMessage(res.data.login.message);
         }
@@ -45,13 +48,13 @@ const LoginView = () => {
       });
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       onLogin();
     }
   };
 
   const handleUp = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       refPassword.current.focus();
     }
   };
@@ -83,7 +86,9 @@ const LoginView = () => {
             autoComplete="false"
             onKeyDown={handleKeyDown}
           />
-          <Typography.Text className="forgot-password">Forgot your password ?</Typography.Text>
+          <Typography.Text className="forgot-password">
+            Forgot your password ?
+          </Typography.Text>
           <Typography.Text type="danger" className="error">
             {errorMessage}
           </Typography.Text>

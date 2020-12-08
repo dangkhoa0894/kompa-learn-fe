@@ -1,15 +1,20 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Row, Col, Avatar, Popover, Typography, Skeleton } from 'antd';
-import { FaEllipsisV } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
-import { getDataLocalStorage } from 'utils/function';
-import { storageCode } from 'resource/string';
-import { BlockContainer, ActionModel, ContainerLoading, ContentStatus } from './styled';
+import PropTypes from "prop-types";
+import React from "react";
+import { Row, Col, Avatar, Popover, Typography, Skeleton } from "antd";
+import { FaEllipsisV } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+import { getDataLocalStorage } from "SRC/utils/function";
+import { storageCode } from "SRC/resource/string";
+import {
+  BlockContainer,
+  ActionModel,
+  ContainerLoading,
+  ContentStatus,
+} from "./styled";
 /* eslint-disable */
 const IconTypes = {
-  1: 'https://static.monkeylearn.com/static/topic-d244d84738e80b9cca950c2cc6127971.svg',
-  2: 'https://static.monkeylearn.com/static/sentiment-c6456ad4f14377dad8d51e1f0e9a4679.svg',
+  1: "https://static.monkeylearn.com/static/topic-d244d84738e80b9cca950c2cc6127971.svg",
+  2: "https://static.monkeylearn.com/static/sentiment-c6456ad4f14377dad8d51e1f0e9a4679.svg",
 };
 function BlockItem(props) {
   const history = useHistory();
@@ -29,7 +34,7 @@ function BlockItem(props) {
     listModelUser,
   } = props;
 
-  const isInfo = type === 'info';
+  const isInfo = type === "info";
   const handleRemove = () => {
     // evt.stopPropagation();
     // evt.preventDefault();
@@ -62,14 +67,28 @@ function BlockItem(props) {
 
   const changePage = () => {
     if (parseInt(status, 10) === 1) {
-      let tempPath = '';
-      tempPath = '/models/{0}/{1}/{2}/test/demo'.format(view, typeModel || 'default', model_id);
+      let tempPath = "";
+      tempPath = "/models/{0}/{1}/{2}/test/demo".format(
+        view,
+        typeModel || "default",
+        model_id
+      );
       let tempLocalData = getDataLocalStorage(storageCode.RECENTLY_MODEL);
-      if (tempLocalData && typeof tempLocalData === 'object') {
-        tempLocalData = setRecentlyModel(model_id, listModelUser, tempLocalData);
-        localStorage.setItem(storageCode.RECENTLY_MODEL, JSON.stringify(tempLocalData));
+      if (tempLocalData && typeof tempLocalData === "object") {
+        tempLocalData = setRecentlyModel(
+          model_id,
+          listModelUser,
+          tempLocalData
+        );
+        localStorage.setItem(
+          storageCode.RECENTLY_MODEL,
+          JSON.stringify(tempLocalData)
+        );
       } else {
-        localStorage.setItem(storageCode.RECENTLY_MODEL, JSON.stringify([model_id]));
+        localStorage.setItem(
+          storageCode.RECENTLY_MODEL,
+          JSON.stringify([model_id])
+        );
       }
       history.push(tempPath);
     }
@@ -80,7 +99,11 @@ function BlockItem(props) {
     <BlockContainer onClick={changePage} status={status}>
       <Row justify="space-between" align="middle" className="avatar-group">
         <Col>
-          <Avatar size="50" src={IconTypes[type] || avatar} className="avatar" />
+          <Avatar
+            size="50"
+            src={IconTypes[type] || avatar}
+            className="avatar"
+          />
         </Col>
         {!isInfo && (
           <Col>
@@ -92,7 +115,10 @@ function BlockItem(props) {
               trigger="click"
             >
               {onRemove && (
-                <FaEllipsisV className="icon-more" onClick={(evt) => evt.stopPropagation()} />
+                <FaEllipsisV
+                  className="icon-more"
+                  onClick={(evt) => evt.stopPropagation()}
+                />
               )}
             </Popover>
           </Col>
@@ -119,13 +145,13 @@ function BlockItem(props) {
 }
 
 BlockItem.defaultProps = {
-  type: 'models',
-  view: 'dashboard',
-  avatar: 'https://laptops.vn/static/img/default.jpg',
-  description: '',
+  type: "models",
+  view: "dashboard",
+  avatar: "https://laptops.vn/static/img/default.jpg",
+  description: "",
   model_id: null,
-  label: '',
-  typeModel: '',
+  label: "",
+  typeModel: "",
   loading: false,
   //   onRemove: () => {},
   status: 0,
@@ -157,7 +183,12 @@ const ContentPopover = (props) => {
 
   return (
     <ActionModel>
-      <div onClick={handleRemove} role="button" tabIndex="0" onKeyPress={handleRemove}>
+      <div
+        onClick={handleRemove}
+        role="button"
+        tabIndex="0"
+        onKeyPress={handleRemove}
+      >
         Delete
       </div>
     </ActionModel>

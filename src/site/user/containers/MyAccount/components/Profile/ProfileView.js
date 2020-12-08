@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { Typography, Input, Row, Col, Checkbox, notification } from 'antd';
-import FormView from 'components/common/Form';
+import React, { useState, useRef } from "react";
+import { Typography, Input, Row, Col, Checkbox, notification } from "antd";
+import FormView from "SRC/components/common/Form";
 
-import { useInfoUser } from 'hooks/User';
-import LoadingBlock from 'components/common/LoadingBlock';
-import { parseError } from 'utils/function';
-import { ContainerProfile, ContainProfile } from './styled';
-import { useUpdateInfoUser } from './hooks';
+import { useInfoUser } from "SRC/hooks/User";
+import LoadingBlock from "SRC/components/common/LoadingBlock";
+import { parseError } from "SRC/utils/function";
+import { ContainerProfile, ContainProfile } from "./styled";
+import { useUpdateInfoUser } from "./hooks";
 
 const ProfileView = (props) => {
   const infoUser = useInfoUser(props);
@@ -40,16 +40,21 @@ export const Profile = ({ infoUser }) => {
       const update = await doUpdateInfo(params);
     } catch (e) {
       notification.error({
-        message: 'Error Message',
-        description: 'Update info user fail, please try again !',
+        message: "Error Message",
+        description: "Update info user fail, please try again !",
       });
     }
   };
 
   return (
     <ContainProfile>
-      <FormView title="Profile" onSubmit={onSubmit} loading={loading} textButton="Save Profile">
-        {typeof infoUser?.firstName !== 'string' ? (
+      <FormView
+        title="Profile"
+        onSubmit={onSubmit}
+        loading={loading}
+        textButton="Save Profile"
+      >
+        {typeof infoUser?.firstName !== "string" ? (
           <LoadingBlock height={180} />
         ) : (
           <>
@@ -113,7 +118,7 @@ const ChangeEmail = ({ infoUser }) => {
     } catch (e) {
       console.log(e);
       notification.error({
-        message: 'Error Message',
+        message: "Error Message",
         description: parseError(e).message,
       });
     }
@@ -121,13 +126,22 @@ const ChangeEmail = ({ infoUser }) => {
 
   return (
     <ContainProfile>
-      <FormView title="Profile" onSubmit={onSubmit} loading={loading} textButton="Save new email">
+      <FormView
+        title="Profile"
+        onSubmit={onSubmit}
+        loading={loading}
+        textButton="Save new email"
+      >
         <Row align="center" className="row-content">
           <Col className="col-label" xs={{ span: 24 }} md={{ span: 4 }}>
             New Email
           </Col>
           <Col className="col-input" xs={{ span: 24 }} md={{ span: 12 }}>
-            <Input placeholder="New Email" ref={refNewEmail} className="input" />
+            <Input
+              placeholder="New Email"
+              ref={refNewEmail}
+              className="input"
+            />
           </Col>
         </Row>
         <Row align="center" className="row-content">
@@ -135,7 +149,12 @@ const ChangeEmail = ({ infoUser }) => {
             Password
           </Col>
           <Col className="col-input" xs={{ span: 24 }} md={{ span: 12 }}>
-            <Input placeholder="Last Name" type="password" ref={refPassword} className="input" />
+            <Input
+              placeholder="Last Name"
+              type="password"
+              ref={refPassword}
+              className="input"
+            />
           </Col>
         </Row>
       </FormView>

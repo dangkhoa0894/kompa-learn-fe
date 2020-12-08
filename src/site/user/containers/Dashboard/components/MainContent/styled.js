@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 // TOP CONTENT
 export const WrapperMainContent = styled.div`
   flex: 1;
@@ -11,7 +11,7 @@ export const WrapperMainContent = styled.div`
   align-items: center;
   overflow: auto;
   ${media.md`
-  overflow: ${({ isMoreTemplate }) => (isMoreTemplate ? 'auto' : 'hidden')};
+  overflow: ${({ isMoreTemplate }) => (isMoreTemplate ? "auto" : "hidden")};
 `}
 `;
 export const BodyDashBoard = styled.div`
@@ -25,7 +25,7 @@ export const BodyDashBoard = styled.div`
   width: 100%;
 
   ${media.lg`
-    width: ${({ isShowDetail }) => (isShowDetail ? '100%' : '1200px')};
+    width: ${({ isShowDetail }) => (isShowDetail ? "100%" : "1200px")};
 `}/* flex-direction: column;
   flex: 1;
   display: flex; */

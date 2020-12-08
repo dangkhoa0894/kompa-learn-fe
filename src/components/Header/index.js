@@ -1,21 +1,21 @@
-import React from 'react';
-import { Row, Col } from 'antd';
-import Breadcrumb from 'components/common/Breadcrumb';
-import { LinkLogo, HeaderContainer } from './styled';
-import TabMenu from './components/TabMenu';
-import UserAction from './components/UserAction';
-import MenuMobile from './components/MenuMobile';
-import 'antd/dist/antd.css';
+import React from "react";
+import { Row, Col } from "antd";
+import Breadcrumb from "SRC/components/common/Breadcrumb";
+import { LinkLogo, HeaderContainer } from "./styled";
+import TabMenu from "./components/TabMenu";
+import UserAction from "./components/UserAction";
+import MenuMobile from "./components/MenuMobile";
+import "antd/dist/antd.css";
 
 const headerType = {
-  profile: ['breadcrumb', 'createModel'],
-  model: ['breadcrumb', 'setting'],
-  home: ['logo', 'menu', 'createModel'],
+  profile: ["breadcrumb", "createModel"],
+  model: ["breadcrumb", "setting"],
+  home: ["logo", "menu", "createModel"],
 };
 
 function Header(props) {
   const listComponentsHeader = headerType[props?.type];
-  const isMenu = listComponentsHeader.includes('menu');
+  const isMenu = listComponentsHeader.includes("menu");
 
   return (
     <HeaderContainer align="middle">
@@ -38,7 +38,7 @@ function Header(props) {
 }
 
 Header.defaultProps = {
-  type: 'home',
+  type: "home",
   infoUser: {},
 };
 export default Header;
@@ -46,11 +46,11 @@ export default Header;
 const RenderComponents = (props) => {
   const renderComponents = (data, isMenu) => {
     switch (data) {
-      case 'breadcrumb':
+      case "breadcrumb":
         return <BreadcrumbCustom isMenu={isMenu} />;
-      case 'logo':
+      case "logo":
         return <LogoCompany isMenu={isMenu} />;
-      case 'createModel':
+      case "createModel":
         return (
           <UserActionCustom
             isCreate
@@ -59,7 +59,7 @@ const RenderComponents = (props) => {
             {...props}
           />
         );
-      case 'setting':
+      case "setting":
         return (
           <UserActionCustom
             isCreate={false}
@@ -68,7 +68,7 @@ const RenderComponents = (props) => {
             {...props}
           />
         );
-      case 'menu':
+      case "menu":
         return <MenuCustom />;
       default:
         return null;
@@ -81,7 +81,7 @@ const LogoCompany = (props) => {
   return (
     <Col xs={{ span: 20 }} lg={{ span: props?.isMenu ? 8 : 12 }}>
       <Row justify="start">
-        <LinkLogo to={{ pathname: '/' }}>
+        <LinkLogo to={{ pathname: "/" }}>
           <div className="logo" />
           {/* <Typography.Text className="company-name">Kompa</Typography.Text> */}
         </LinkLogo>

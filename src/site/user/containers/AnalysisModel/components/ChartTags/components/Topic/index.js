@@ -1,7 +1,7 @@
-import StackedBarChart from 'components/common/Chart/NChart/StackedBarChart';
-import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
-import { TopicChartCss } from './styled';
+import StackedBarChart from "SRC/components/common/Chart/NChart/StackedBarChart";
+import PropTypes from "prop-types";
+import React, { useMemo } from "react";
+import { TopicChartCss } from "./styled";
 
 const TopicChart = (props) => {
   const { counterLabel, isFull } = props;
@@ -21,11 +21,17 @@ const TopicChart = (props) => {
     return null;
   };
 
-  const dataChart = useMemo(() => handleDataChart(counterLabel), [counterLabel]);
+  const dataChart = useMemo(() => handleDataChart(counterLabel), [
+    counterLabel,
+  ]);
 
   return (
     <TopicChartCss>
-      {counterLabel && <StackedBarChart dataChart={isFull ? dataChart : dataChart.slice(0, 5)} />}
+      {counterLabel && (
+        <StackedBarChart
+          dataChart={isFull ? dataChart : dataChart.slice(0, 5)}
+        />
+      )}
     </TopicChartCss>
   );
 };

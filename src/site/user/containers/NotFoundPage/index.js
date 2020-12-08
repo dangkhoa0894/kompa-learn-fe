@@ -1,7 +1,7 @@
-import React from 'react';
-import PageNotFound from 'resource/images/404.gif';
-import Header from '../../../../components/Header';
-import { WrapperHome } from './styled';
+import React from "react";
+import PageNotFound from "SRC/resource/images/404.gif";
+// import Header from "../../../../components/Header";
+import { WrapperHome } from "./styled";
 
 function NotFoundPage(props) {
   return (

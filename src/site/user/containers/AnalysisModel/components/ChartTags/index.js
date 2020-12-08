@@ -1,16 +1,18 @@
-import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
-import AnalysisTag from 'components/AnalysisTag';
-import { Typography } from 'antd';
-import AmPieChart from 'components/common/Chart/Am/PieChart';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { WrapperAnalysisTag } from './styled';
+import PropTypes from "prop-types";
+import React, { useMemo } from "react";
+import AnalysisTag from "SRC/components/AnalysisTag";
+import { Typography } from "antd";
+import AmPieChart from "SRC/components/common/Chart/Am/PieChart";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { WrapperAnalysisTag } from "./styled";
 
 const ChartTags = (props) => {
   const {
     dataModel: { counterLabel, typeModel },
   } = props;
-  const counterCache = useMemo(() => counterLabel && JSON.parse(counterLabel), [counterLabel]);
+  const counterCache = useMemo(() => counterLabel && JSON.parse(counterLabel), [
+    counterLabel,
+  ]);
 
   const renderChart = () => {
     switch (typeModel) {
@@ -21,7 +23,11 @@ const ChartTags = (props) => {
               <Typography.Title level={3}>Topic</Typography.Title>
             </div>
             <div className="analysis-tag">
-              <AnalysisTag dataModel={props.dataModel} minHeight={300} numberRow={6} />
+              <AnalysisTag
+                dataModel={props.dataModel}
+                minHeight={300}
+                numberRow={6}
+              />
             </div>
           </>
         );
@@ -43,7 +49,9 @@ const ChartTags = (props) => {
       case 3:
         return (
           <>
-            <Typography.Title level={3}>Multiple Topic & Sentiment </Typography.Title>
+            <Typography.Title level={3}>
+              Multiple Topic & Sentiment{" "}
+            </Typography.Title>
             <div className="analysis-tag " />
           </>
         );

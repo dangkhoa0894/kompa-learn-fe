@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import Loading from 'resource/images/Loading2.gif';
-import React from 'react';
-import { Typography } from 'antd';
-import { ContainerLoading } from './styled';
+import PropTypes from "prop-types";
+import Loading from "SRC/resource/images/Loading2.gif";
+import React from "react";
+import { Typography } from "antd";
+import { ContainerLoading } from "./styled";
 
 const LoadingText = (props) => {
   const { title, colorText } = props;
@@ -20,7 +20,7 @@ LoadingText.propTypes = {
   colorText: PropTypes.string,
 };
 LoadingText.defaultProps = {
-  title: '',
-  colorText: '#fff',
+  title: "",
+  colorText: "#fff",
 };
 export default LoadingText;

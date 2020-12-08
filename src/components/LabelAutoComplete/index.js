@@ -1,8 +1,8 @@
-import React from 'react';
-import { Select } from 'antd';
-import TagRender from 'site/user/containers/ModifyModel/components/InfoModel/components/ModifyData/components/TagRender';
-import { ContainerLabelAuto } from './styled';
-import { useModifyLabel } from './hooks';
+import React from "react";
+import { Select } from "antd";
+import TagRender from "SRC/site/user/containers/ModifyModel/components/InfoModel/components/ModifyData/components/TagRender";
+import { ContainerLabelAuto } from "./styled";
+import { useModifyLabel } from "./hooks";
 
 const LabelAutoComplete = (props) => {
   const [
@@ -20,7 +20,7 @@ const LabelAutoComplete = (props) => {
         onBlur={handleUpdateCache}
         value={selectItem.map((item) => item.value)}
         tagRender={(e) => <TagRender {...e} onRemoveItem={removeItem} />}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         placeholder="Tags Mode"
         autoClearSearchValue
         open={isOpenDropdown}

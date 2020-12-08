@@ -1,26 +1,29 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState, memo, useRef } from 'react';
-import { Modal } from 'antd';
-import { GET_ALL_DATA_MODEL, GET_FILTER_DATA_MODEL } from 'graphql/Model/Query';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { useParams, useHistory } from 'react-router-dom';
-import { useGetDetailModel } from 'hooks/Model';
-import { ERROR_CODE } from 'resource/string';
-import { debounce } from 'utils/function';
-import ItemContent from '../ItemContent';
-import { WrapperDataModel } from './styled';
+import PropTypes from "prop-types";
+import React, { useEffect, useState, memo, useRef } from "react";
+import { Modal } from "antd";
+import {
+  GET_ALL_DATA_MODEL,
+  GET_FILTER_DATA_MODEL,
+} from "SRC/graphql/Model/Query";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { useParams, useHistory } from "react-router-dom";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import { ERROR_CODE } from "SRC/resource/string";
+import { debounce } from "SRC/utils/function";
+import ItemContent from "../ItemContent";
+import { WrapperDataModel } from "./styled";
 
 const DataModel = (props) => {
   const { changeStatusFetch, isFetch } = props;
   const history = useHistory();
   const { modelId } = useParams();
   const { data: dataFilter } = useQuery(GET_FILTER_DATA_MODEL);
-  const [doRefresh, { loading: loadingPredict, data: dataPredict }] = useLazyQuery(
-    GET_ALL_DATA_MODEL,
-    {
-      fetchPolicy: 'network-only',
-    },
-  );
+  const [
+    doRefresh,
+    { loading: loadingPredict, data: dataPredict },
+  ] = useLazyQuery(GET_ALL_DATA_MODEL, {
+    fetchPolicy: "network-only",
+  });
   const [{ data }] = useGetDetailModel({
     model: {
       id: modelId,
@@ -75,7 +78,9 @@ const DataModel = (props) => {
       Array.isArray(tempDataPredict?.data?.listFilter)
     ) {
       setDataContent((x) =>
-        isFilter ? tempDataPredict.data.listFilter : x.concat(tempDataPredict.data.listFilter),
+        isFilter
+          ? tempDataPredict.data.listFilter
+          : x.concat(tempDataPredict.data.listFilter)
       );
       changeStatusFetch(false);
       if (isFilter) {
@@ -84,16 +89,16 @@ const DataModel = (props) => {
       }
     } else if (tempDataPredict?.statusCode === 400) {
       Modal.error({
-        title: 'Error Message',
+        title: "Error Message",
         content: (
           <div>
             <p>{tempDataPredict?.message}</p>
           </div>
         ),
-        okText: 'Back to DashBoard',
-        okButtonProps: { type: 'danger' },
+        okText: "Back to DashBoard",
+        okButtonProps: { type: "danger" },
         onOk() {
-          history.push('/main/dashBoard');
+          history.push("/main/dashBoard");
         },
       });
     }
@@ -124,13 +129,22 @@ const DataModel = (props) => {
     <WrapperDataModel>
       <div ref={refListScroll} className="list-content">
         {dataContent.map((e, index) => (
-          <ItemContent key={e.id} labels={data?.labels} index={index + 1} {...e} dataModel={data} />
+          <ItemContent
+            key={e.id}
+            labels={data?.labels}
+            index={index + 1}
+            {...e}
+            dataModel={data}
+          />
         ))}
       </div>
 
       <div className="loading-content" />
       {totalFilter === dataContent.length && !loadingPredict && (
-        <div className="footer-content"> Filter results has {totalFilter} records</div>
+        <div className="footer-content">
+          {" "}
+          Filter results has {totalFilter} records
+        </div>
       )}
     </WrapperDataModel>
   );

@@ -1,20 +1,20 @@
-import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
-import { Modal, Typography } from 'antd';
-import { storageCode, ERROR_CODE } from 'resource/string';
-import { getDataLocalStorage } from 'utils/function';
-import { INACTIVE_MODEL } from 'graphql/Model/Mutations';
-import CompanyNameView from 'components/common/CompanyName';
-import { useMutation } from '@apollo/client';
-import { HeaderContainer, ContentCaution } from './styled';
+import React from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { FaTimes } from "react-icons/fa";
+import { Modal, Typography } from "antd";
+import { storageCode, ERROR_CODE } from "SRC/resource/string";
+import { getDataLocalStorage } from "SRC/utils/function";
+import { INACTIVE_MODEL } from "SRC/graphql/Model/Mutations";
+import CompanyNameView from "SRC/components/common/CompanyName";
+import { useMutation } from "@apollo/client";
+import { HeaderContainer, ContentCaution } from "./styled";
 
 const listScreenCaution = [
-  'type-upload', // type
-  'upload-file',
-  'choose-text',
-  'define-tags',
-  'tag-data',
+  "type-upload", // type
+  "upload-file",
+  "choose-text",
+  "define-tags",
+  "tag-data",
 ];
 function HeaderModule() {
   const [doInactiveModel] = useMutation(INACTIVE_MODEL);
@@ -63,16 +63,17 @@ function HeaderModule() {
       //     },
       //   };
       Modal.warning({
-        title: 'Caution',
+        title: "Caution",
         content: (
           <ContentCaution>
             <Typography.Title level={4}>
-              If you skip this step, all the data will be delected. Do you still want to continue?
+              If you skip this step, all the data will be delected. Do you still
+              want to continue?
             </Typography.Title>
           </ContentCaution>
         ),
-        okText: 'Go Home',
-        okButtonProps: { type: 'danger' },
+        okText: "Go Home",
+        okButtonProps: { type: "danger" },
         onOk() {
           doInactiveModel({
             variables: {
@@ -83,38 +84,38 @@ function HeaderModule() {
           })
             .then((res) => {
               if (res.data.inactiveModel.statusCode === ERROR_CODE.SUCCESS) {
-                history.push('/main/dashboard');
+                history.push("/main/dashboard");
               }
             })
             .catch(() => {
               Modal.error({
-                title: 'Error',
+                title: "Error",
                 content: (
                   <div>
                     <p>Server has problem please try again later</p>
                   </div>
                 ),
                 onOk() {},
-                okText: 'Try again',
+                okText: "Try again",
               });
             });
         },
         okCancel() {},
-        width: 'fit-content',
-        className: 'model-warning-custom',
+        width: "fit-content",
+        className: "model-warning-custom",
       });
       //   history.push('/');
     } else {
-      history.push('/main/dashboard');
+      history.push("/main/dashboard");
     }
   };
 
-  const isGoHome = module === 'choose-type';
+  const isGoHome = module === "choose-type";
   return (
     <HeaderContainer align="middle">
       {/* eslint-disable */}
       <div className="btn-header btn-back" onClick={goBack}>
-        <CompanyNameView color={'black'} hasLink={false} />
+        <CompanyNameView color={"black"} hasLink={false} />
       </div>
       <div className="btn-header btn-close" onClick={goHome}>
         {!isGoHome && <FaTimes />}

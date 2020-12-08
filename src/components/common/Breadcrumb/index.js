@@ -1,18 +1,18 @@
-import React, { memo } from 'react';
-import { Typography } from 'antd';
-import { useParams, useHistory, withRouter } from 'react-router-dom';
-import { FaAngleRight } from 'react-icons/fa';
-import { useInfoUser } from 'hooks/User';
-import { useGetDetailModel } from 'hooks/Model';
-import { LinkLogo, ContainerBreadCrumb, BreadcrumbContent } from './styled';
+import React, { memo } from "react";
+import { Typography } from "antd";
+import { useParams, useHistory, withRouter } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
+import { useInfoUser } from "SRC/hooks/User";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import { LinkLogo, ContainerBreadCrumb, BreadcrumbContent } from "./styled";
 
 const titleBreakCrumb = {
-  'my-account': 'My Account',
+  "my-account": "My Account",
 };
 
 const rootLabel = {
-  dashboard: 'Dash Board',
-  explore: 'Explore',
+  dashboard: "Dash Board",
+  explore: "Explore",
 };
 
 function BreadcrumbView(props) {
@@ -25,13 +25,13 @@ function BreadcrumbView(props) {
   });
   const listCrumb = [
     {
-      label: rootLabel[params.view] || 'Dash Board',
-      href: params.view ? `/main/${params.view}` : '/',
+      label: rootLabel[params.view] || "Dash Board",
+      href: params.view ? `/main/${params.view}` : "/",
       hover: true,
     },
   ];
 
-  if (params.tab === 'setting') {
+  if (params.tab === "setting") {
     listCrumb.push(
       ...[
         {
@@ -45,7 +45,7 @@ function BreadcrumbView(props) {
           label: params.tab,
           hover: false,
         },
-      ],
+      ]
     );
   } else {
     listCrumb.push({
@@ -59,7 +59,7 @@ function BreadcrumbView(props) {
     <ContainerBreadCrumb>
       <LinkLogo
         to={{
-          pathname: '/',
+          pathname: "/",
         }}
       />
       <BreadcrumbContent>
@@ -90,7 +90,7 @@ const ItemBreadcrumb = (props) => {
   const history = useHistory();
   const pushPage = (pathName) => {
     if (pathName) {
-      if (typeof pathName === 'function') {
+      if (typeof pathName === "function") {
         pathName();
       } else {
         history.push(pathName);
@@ -100,7 +100,7 @@ const ItemBreadcrumb = (props) => {
   return (
     <>
       <Typography.Text
-        className={`link-to ${props?.hover && 'hover'}`}
+        className={`link-to ${props?.hover && "hover"}`}
         onClick={() => pushPage(props?.href)}
       >
         {props?.label}

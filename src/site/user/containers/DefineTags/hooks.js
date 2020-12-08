@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { UPDATE_LABEL_MODEL } from 'graphql/Model/Mutations';
-import { useMutation } from '@apollo/client';
+import { useCallback } from "react";
+import { UPDATE_LABEL_MODEL } from "SRC/graphql/Model/Mutations";
+import { useMutation } from "@apollo/client";
 
 export const useCreateLabel = () => {
   const [doCreate, { loading }] = useMutation(UPDATE_LABEL_MODEL);

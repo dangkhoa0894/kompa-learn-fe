@@ -1,8 +1,8 @@
-import { Typography } from 'antd';
-import { useIntersectionObserverLazyContent } from 'hooks/UI';
-import PropTypes from 'prop-types';
-import React, { memo, useRef, useState } from 'react';
-import { WrapperItemContent } from './styled';
+import { useIntersectionObserverLazyContent } from "SRC/hooks/UI";
+import { Typography } from "antd";
+import PropTypes from "prop-types";
+import React, { memo, useRef, useState } from "react";
+import { WrapperItemContent } from "./styled";
 
 const ItemContent = (props) => {
   // eslint-disable-next-line no-unused-vars
@@ -19,18 +19,24 @@ const ItemContent = (props) => {
     <WrapperItemContent ref={refItemContent}>
       <div className="item-index">{index}</div>
       <div
-        className={`item-content ${isShow && 'show'}`}
+        className={`item-content ${isShow && "show"}`}
         data-content={tempContent}
         id="lazy-content"
       />
       {content.length >= 1100 && (
-        <div className="more-content" onClick={toggleShowContent} role="presentation">
+        <div
+          className="more-content"
+          onClick={toggleShowContent}
+          role="presentation"
+        >
           <Typography.Text className="button-more">
-            {isShow ? 'Show less' : 'Show more'}
+            {isShow ? "Show less" : "Show more"}
           </Typography.Text>
         </div>
       )}
-      <div className="label-item">{labels.find((e) => e.id === labelId)?.labelName}</div>
+      <div className="label-item">
+        {labels.find((e) => e.id === labelId)?.labelName}
+      </div>
     </WrapperItemContent>
   );
 };
@@ -44,7 +50,7 @@ ItemContent.propTypes = {
 };
 
 ItemContent.defaultProps = {
-  content: '',
+  content: "",
   index: 0,
   labelId: 0,
   labels: [],

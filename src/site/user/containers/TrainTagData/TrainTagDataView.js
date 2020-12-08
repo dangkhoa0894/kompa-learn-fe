@@ -1,22 +1,22 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { Typography, Col, Modal, Button, notification } from 'antd';
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { Typography, Col, Modal, Button, notification } from "antd";
 
-import { MainButton } from 'styles/mainStyled';
-import ModalView from 'components/common/Modal';
-import theme from 'styles/theme';
-import Title from 'components/common/Title';
-import PropTypes from 'prop-types';
+import { MainButton } from "SRC/styles/mainStyled";
+import ModalView from "SRC/components/common/Modal";
+import theme from "SRC/styles/theme";
+import Title from "SRC/components/common/Title";
+import PropTypes from "prop-types";
 
-import { ERROR_CODE } from 'resource/string';
-import { useMutation } from '@apollo/client';
-import LoadingText from 'components/common/LoadingText';
-import { TRAIN_DATA } from 'graphql/Model/Mutations';
-import { useInfoUser } from 'hooks/User';
-import { useGetDetailModel } from 'hooks/Model';
-import { FaArrowRight, FaArrowLeft, FaCopy } from 'react-icons/fa';
-import ProgressBar from 'components/ProgressBar';
+import { ERROR_CODE } from "SRC/resource/string";
+import { useMutation } from "@apollo/client";
+import LoadingText from "SRC/components/common/LoadingText";
+import { TRAIN_DATA } from "SRC/graphql/Model/Mutations";
+import { useInfoUser } from "SRC/hooks/User";
+import { useGetDetailModel } from "SRC/hooks/Model";
+import { FaArrowRight, FaArrowLeft, FaCopy } from "react-icons/fa";
+import ProgressBar from "SRC/components/ProgressBar";
 import {
   Container,
   TableTrainData,
@@ -34,7 +34,7 @@ import {
   ContentProgress,
   ContainSentiment,
   DuplicateContent,
-} from './styled';
+} from "./styled";
 import {
   useGetDataByPage,
   useUpdateLabel,
@@ -43,10 +43,10 @@ import {
   useDuplicateContent,
   useValidateValue,
   useNotifyUpload,
-} from './hooks';
-import { TagItem } from './components/TagItem';
-import CongratulationsPopup from './components/CongratulationsPopup';
-import TagSentiment from './components/TagSentiment';
+} from "./hooks";
+import { TagItem } from "./components/TagItem";
+import CongratulationsPopup from "./components/CongratulationsPopup";
+import TagSentiment from "./components/TagSentiment";
 
 function TrainTagDataView(props) {
   const history = useHistory();
@@ -64,7 +64,9 @@ function TrainTagDataView(props) {
     },
     cache: false,
   });
-  const [getMore, { data, loading: loadingGetData }] = useGetDataByPage({ modelId });
+  const [getMore, { data, loading: loadingGetData }] = useGetDataByPage({
+    modelId,
+  });
   const [doUploadFile, { isLoading }] = useSubmitFile();
   const [doTrain, { loading: loadingTrain }] = useMutation(TRAIN_DATA);
   const [doUpdateLabel] = useUpdateLabel();
@@ -125,7 +127,9 @@ function TrainTagDataView(props) {
   const onChooseSentiment = (evt) => {
     const tempActiveItem = { ...evt };
     tempActiveItem.isChooseSentiment = true;
-    const sentimentActive = listSentiment.find((item) => item.isChooseSentiment);
+    const sentimentActive = listSentiment.find(
+      (item) => item.isChooseSentiment
+    );
     if (!sentimentActive || tempActiveItem.id !== sentimentActive.id) {
       doUpdateSentiment({
         contentId: contentData[indexMultiple].id,
@@ -149,11 +153,11 @@ function TrainTagDataView(props) {
       })
         .then((res) => {
           if (res.data.trainModel.statusCode === ERROR_CODE.SUCCESS) {
-            history.push('/main/dashboard');
+            history.push("/main/dashboard");
           } else {
             setIsOpenTrainPanel(false);
             Modal.error({
-              title: 'Error Message',
+              title: "Error Message",
               content: (
                 <div>
                   <p>{res.data.trainModel.message}</p>
@@ -165,7 +169,7 @@ function TrainTagDataView(props) {
         })
         .catch(() => {
           Modal.error({
-            title: 'Error',
+            title: "Error",
             content: (
               <div>
                 <p>Server has problem please try again later</p>
@@ -188,15 +192,15 @@ function TrainTagDataView(props) {
         setIndexMultiple(indexMultiple + 1);
       } else {
         setIndexMultiple(0);
-        if (typeof contentData === 'object' && indexData < sizeData) {
+        if (typeof contentData === "object" && indexData < sizeData) {
           //   getMore({ page: indexData + 1 });
           setIndexData((x) => x + 1);
         }
       }
     } else {
       notification.error({
-        message: 'Error message',
-        description: 'Please choose both sentiment and label !',
+        message: "Error message",
+        description: "Please choose both sentiment and label !",
       });
     }
     //   saveTagContent();
@@ -209,7 +213,7 @@ function TrainTagDataView(props) {
     });
     if (validateCheck) {
       if (indexMultiple === 0) {
-        if (typeof contentData === 'object' && indexData >= 1) {
+        if (typeof contentData === "object" && indexData >= 1) {
           //   getMore({ page: indexData - 1 });
           setIndexData((x) => x - 1);
           setIndexMultiple(0);
@@ -219,8 +223,8 @@ function TrainTagDataView(props) {
       }
     } else {
       notification.error({
-        message: 'Error message',
-        description: 'Please choose both sentiment and label !',
+        message: "Error message",
+        description: "Please choose both sentiment and label !",
       });
     }
     //   saveTagContent();
@@ -247,7 +251,7 @@ function TrainTagDataView(props) {
             setIsOpenTrainPanel(true);
           } else {
             Modal.error({
-              title: 'Error Message',
+              title: "Error Message",
               content: (
                 <div>
                   <p>{res.data.sendFileToCore.message}</p>
@@ -259,7 +263,7 @@ function TrainTagDataView(props) {
         })
         .catch(() => {
           Modal.error({
-            title: 'Error',
+            title: "Error",
             content: (
               <div>
                 <p>Server has problem please try again later</p>
@@ -289,7 +293,7 @@ function TrainTagDataView(props) {
             <Content>
               {/* {!loadingGetData && typeof contentData === 'object' && contentData[indexMultiple]?.id} */}
               {!loadingGetData &&
-                typeof contentData === 'object' &&
+                typeof contentData === "object" &&
                 contentData[indexMultiple]?.content}
             </Content>
             <Action>
@@ -310,7 +314,9 @@ function TrainTagDataView(props) {
             {infoModel.typeModel !== 2 && (
               <>
                 <TagsHeader>
-                  <Typography.Text className="tags-header">Tags</Typography.Text>
+                  <Typography.Text className="tags-header">
+                    Tags
+                  </Typography.Text>
                 </TagsHeader>
                 <ContentTags>
                   {listTag &&
@@ -321,7 +327,9 @@ function TrainTagDataView(props) {
                           key={e.id}
                           onChoose={(v) => onChooseTag(v)}
                           data={e}
-                          content={typeof contentData === 'object' && contentData}
+                          content={
+                            typeof contentData === "object" && contentData
+                          }
                         />
                       );
                     })}
@@ -331,7 +339,9 @@ function TrainTagDataView(props) {
             {infoModel.typeModel === 3 && (
               <DuplicateContent>
                 <TagsHeader>
-                  <Typography.Text className="tags-header">Multiple</Typography.Text>
+                  <Typography.Text className="tags-header">
+                    Multiple
+                  </Typography.Text>
                 </TagsHeader>
                 {`${indexMultiple + 1}/${contentData.length}`}
                 <div>
@@ -345,14 +355,20 @@ function TrainTagDataView(props) {
             {infoModel.typeModel !== 1 && (
               <ContainSentiment>
                 <TagsHeader>
-                  <Typography.Text className="tags-header">Sentiment</Typography.Text>
+                  <Typography.Text className="tags-header">
+                    Sentiment
+                  </Typography.Text>
                 </TagsHeader>
                 <div className="root-sentiment">
                   {listSentiment &&
                     listSentiment.length > 0 &&
                     listSentiment.map((e) => {
                       return (
-                        <TagSentiment key={e.id} onChoose={(v) => onChooseSentiment(v)} data={e} />
+                        <TagSentiment
+                          key={e.id}
+                          onChoose={(v) => onChooseSentiment(v)}
+                          data={e}
+                        />
                       );
                     })}
                 </div>
@@ -372,7 +388,9 @@ function TrainTagDataView(props) {
               {sizeData}
             </Typography.Text>
             <ProgressBar
-              percent={(typeof contentData === 'object' && 100 / sizeData) * indexData}
+              percent={
+                (typeof contentData === "object" && 100 / sizeData) * indexData
+              }
               strokeColor={theme.colors.green.green_1}
               trailColor={theme.colors.green.green_1Light}
             />
@@ -380,12 +398,12 @@ function TrainTagDataView(props) {
         </Col>
         <Col xs={{ span: 24 }} md={{ span: 6 }} className="content-button">
           <MainButton width="150px" type="primary" onClick={onConfirm}>
-            {isLoading ? <LoadingText title="Loading" /> : 'Confirm'}
+            {isLoading ? <LoadingText title="Loading" /> : "Confirm"}
           </MainButton>
           <ModalView
             isOpen={isOpenTrainPanel}
             onOk={onSubmit}
-            okButtonProps={{ disabled: isSuccess !== 1, type: 'primary' }}
+            okButtonProps={{ disabled: isSuccess !== 1, type: "primary" }}
             content={<CongratulationsPopup isSuccess={isSuccess} />}
             okText="Training"
             okType="success"

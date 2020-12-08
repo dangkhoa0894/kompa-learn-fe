@@ -1,14 +1,23 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Slider, Typography, Button, Form, Row, Col, Select, InputNumber } from 'antd';
-import { MainButton } from 'styles/mainStyled';
-import LoadingText from 'components/common/LoadingText';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { useParams } from 'react-router-dom';
-import { useUpdateConfigModel } from 'hooks/Config';
-import { useGetAllAlgorithm } from 'hooks/Model';
-import { DEFAULT_CONFIG } from 'resource/string';
-import { WrapperAdvance } from './styled';
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import {
+  Slider,
+  Typography,
+  Button,
+  Form,
+  Row,
+  Col,
+  Select,
+  InputNumber,
+} from "antd";
+import { MainButton } from "SRC/styles/mainStyled";
+import LoadingText from "SRC/components/common/LoadingText";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { useParams } from "react-router-dom";
+import { useUpdateConfigModel } from "SRC/hooks/Config";
+import { useGetAllAlgorithm } from "SRC/hooks/Model";
+import { DEFAULT_CONFIG } from "SRC/resource/string";
+import { WrapperAdvance } from "./styled";
 
 const listConfig = {
   batchSize: {
@@ -47,10 +56,10 @@ const listConfig = {
     100: 512,
   },
   epochs: {
-    0: '0',
-    55: '55',
-    88: '67',
-    100: '100',
+    0: "0",
+    55: "55",
+    88: "67",
+    100: "100",
   },
   threshold: {
     10: 0.1,
@@ -84,8 +93,9 @@ const ConfigAdvance = (props) => {
     if (!loading) {
       const tempData = {};
       Object.keys(a).forEach((item) => {
-        if (item !== 'algorithm') {
-          tempData[item] = parseFloat(listConfig[item][a[item]], 10) || config[item];
+        if (item !== "algorithm") {
+          tempData[item] =
+            parseFloat(listConfig[item][a[item]], 10) || config[item];
         }
       });
       const tempConfig = {
@@ -109,7 +119,7 @@ const ConfigAdvance = (props) => {
       if (config?.algorithm) {
         setAlgorithm({
           ...config.algorithm,
-          children: 'choose',
+          children: "choose",
           key: config.algorithm.id,
           id: config.algorithm.coreId,
         });
@@ -121,13 +131,17 @@ const ConfigAdvance = (props) => {
     let tempHasModify = false;
     if (
       config.algorithm.coreId !== (data.value || algorithm.id) ||
-      listConfig.batchSize[form.getFieldValue('batchSize')] !== config.batchSize ||
-      listConfig.maxFeatures[form.getFieldValue('maxFeatures')] !== config.maxFeatures ||
-      listConfig.maxLen[form.getFieldValue('maxLen')] !== config.maxLen ||
-      listConfig.embedSize[form.getFieldValue('embedSize')] !== config.embedSize ||
+      listConfig.batchSize[form.getFieldValue("batchSize")] !==
+        config.batchSize ||
+      listConfig.maxFeatures[form.getFieldValue("maxFeatures")] !==
+        config.maxFeatures ||
+      listConfig.maxLen[form.getFieldValue("maxLen")] !== config.maxLen ||
+      listConfig.embedSize[form.getFieldValue("embedSize")] !==
+        config.embedSize ||
       ((data.value || algorithm.value) > 5 &&
-        listConfig.epochs[form.getFieldValue('epochs')] !== `${config.epochs}`) ||
-      listConfig.threshold[form.getFieldValue('threshold')] !== config.threshold
+        listConfig.epochs[form.getFieldValue("epochs")] !==
+          `${config.epochs}`) ||
+      listConfig.threshold[form.getFieldValue("threshold")] !== config.threshold
     ) {
       tempHasModify = true;
     }
@@ -147,8 +161,10 @@ const ConfigAdvance = (props) => {
 
   const getInitValue = (name) => {
     return parseFloat(
-      Object.keys(listConfig[name]).find((item) => listConfig[name][item] === config?.[name]),
-      10,
+      Object.keys(listConfig[name]).find(
+        (item) => listConfig[name][item] === config?.[name]
+      ),
+      10
     );
   };
 
@@ -159,18 +175,20 @@ const ConfigAdvance = (props) => {
 
   const onReset = () => {
     form.setFieldsValue({
-      batchSize: getDefaultValue('batchSize'),
-      maxFeatures: getDefaultValue('maxFeatures'),
-      maxLen: getDefaultValue('maxLen'),
-      embedSize: getDefaultValue('embedSize'),
-      epochs: `${getDefaultValue('epochs')}`,
-      threshold: getDefaultValue('threshold'),
+      batchSize: getDefaultValue("batchSize"),
+      maxFeatures: getDefaultValue("maxFeatures"),
+      maxLen: getDefaultValue("maxLen"),
+      embedSize: getDefaultValue("embedSize"),
+      epochs: `${getDefaultValue("epochs")}`,
+      threshold: getDefaultValue("threshold"),
     });
   };
 
   return (
     <WrapperAdvance>
-      <Typography.Text className="title-config-advance">Advance</Typography.Text>
+      <Typography.Text className="title-config-advance">
+        Advance
+      </Typography.Text>
       <Form
         name="validate_other"
         {...formItemLayout}
@@ -204,7 +222,10 @@ const ConfigAdvance = (props) => {
                             {listAlgorithm.map((item) => {
                               if (item.coreId < 6) {
                                 return (
-                                  <Select.Option key={item.coreId} value={item.coreId}>
+                                  <Select.Option
+                                    key={item.coreId}
+                                    value={item.coreId}
+                                  >
                                     {item.coreId}. {item.name}
                                   </Select.Option>
                                 );
@@ -216,7 +237,10 @@ const ConfigAdvance = (props) => {
                             {listAlgorithm.map((item) => {
                               if (item.coreId > 5) {
                                 return (
-                                  <Select.Option key={item.coreId} value={item.coreId}>
+                                  <Select.Option
+                                    key={item.coreId}
+                                    value={item.coreId}
+                                  >
                                     {item.coreId}. {item.name}
                                   </Select.Option>
                                 );
@@ -241,7 +265,7 @@ const ConfigAdvance = (props) => {
                     labelCol={{ span: 20 }}
                     wrapperCol={{ span: 24 }}
                     // eslint-disable-next-line react/jsx-no-duplicate-props
-                    className={`${isEpochs ? 'show' : 'hidden'}`}
+                    className={`${isEpochs ? "show" : "hidden"}`}
                     initialValue={100}
                   >
                     <InputNumber
@@ -259,7 +283,7 @@ const ConfigAdvance = (props) => {
             <Loading mode="panel" />
           )}
           {/* /// */}
-          {typeof config === 'object' ? (
+          {typeof config === "object" ? (
             <>
               <Row gutter={[12, 12]} className="row-config">
                 <Col xs={{ span: 24 }} md={{ span: 12 }} className="col-config">
@@ -268,7 +292,7 @@ const ConfigAdvance = (props) => {
                       name="batchSize"
                       label="Batch Size"
                       className="item-config"
-                      initialValue={getInitValue('batchSize')}
+                      initialValue={getInitValue("batchSize")}
                     >
                       <Slider
                         marks={listConfig.batchSize}
@@ -285,7 +309,7 @@ const ConfigAdvance = (props) => {
                       name="maxFeatures"
                       label="Max Features"
                       className="item-config"
-                      initialValue={getInitValue('maxFeatures')}
+                      initialValue={getInitValue("maxFeatures")}
                     >
                       <Slider
                         marks={listConfig.maxFeatures}
@@ -302,7 +326,7 @@ const ConfigAdvance = (props) => {
                       name="maxLen"
                       label="Max Len"
                       className="item-config"
-                      initialValue={getInitValue('maxLen')}
+                      initialValue={getInitValue("maxLen")}
                     >
                       <Slider
                         marks={listConfig.maxLen}
@@ -320,7 +344,7 @@ const ConfigAdvance = (props) => {
                       name="embedSize"
                       label="Embed Size"
                       className="item-config"
-                      initialValue={getInitValue('embedSize')}
+                      initialValue={getInitValue("embedSize")}
                     >
                       <Slider
                         marks={listConfig.embedSize}
@@ -337,7 +361,7 @@ const ConfigAdvance = (props) => {
                       name="threshold"
                       label="Threshold"
                       className="item-config"
-                      initialValue={getInitValue('threshold')}
+                      initialValue={getInitValue("threshold")}
                     >
                       <Slider
                         marks={listConfig.threshold}
@@ -350,15 +374,28 @@ const ConfigAdvance = (props) => {
                 </Col>
               </Row>
               <Row>
-                <Col xs={{ span: 24 }} md={{ span: 12, offset: 12 }} lg={{ span: 9, offset: 15 }}>
+                <Col
+                  xs={{ span: 24 }}
+                  md={{ span: 12, offset: 12 }}
+                  lg={{ span: 9, offset: 15 }}
+                >
                   <Form.Item wrapperCol={{ span: 24 }}>
                     <div className="group-button">
-                      <Button type="primary" className="btn-reset" danger onClick={onReset}>
+                      <Button
+                        type="primary"
+                        className="btn-reset"
+                        danger
+                        onClick={onReset}
+                      >
                         Reset default
                       </Button>
 
-                      <MainButton type="primary" htmlType="submit" disabled={!hasModify}>
-                        {loading ? <LoadingText title="Loading" /> : 'Save'}
+                      <MainButton
+                        type="primary"
+                        htmlType="submit"
+                        disabled={!hasModify}
+                      >
+                        {loading ? <LoadingText title="Loading" /> : "Save"}
                       </MainButton>
                     </div>
                   </Form.Item>

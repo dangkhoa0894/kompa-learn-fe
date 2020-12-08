@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { memo, useState } from 'react';
-import { Typography } from 'antd';
-import ItemMultiple from 'components/common/ItemMultiple';
-import ItemSingle from 'components/common/ItemSingle';
-import { ItemDataPreview } from './styled';
+import PropTypes from "prop-types";
+import React, { memo, useState } from "react";
+import { Typography } from "antd";
+import ItemMultiple from "SRC/components/common/ItemMultiple";
+import ItemSingle from "SRC/components/common/ItemSingle";
+import { ItemDataPreview } from "./styled";
 
 const ItemData = (props) => {
   const { content, resPredict, dataModel, id } = props;
@@ -17,7 +17,7 @@ const ItemData = (props) => {
   };
   return (
     <ItemDataPreview>
-      <Typography.Text id={id} className={`content-item ${isMore && 'show'}`}>
+      <Typography.Text id={id} className={`content-item ${isMore && "show"}`}>
         {content}
       </Typography.Text>
       <div className="button-more">
@@ -28,7 +28,7 @@ const ItemData = (props) => {
             onKeyPress={toggleMore}
             role="presentation"
           >
-            {isMore ? 'Show less' : 'Show more'}
+            {isMore ? "Show less" : "Show more"}
           </Typography.Text>
         )}
       </div>
@@ -39,7 +39,12 @@ const ItemData = (props) => {
             resPredict.map((item, index) => {
               if (item.sentiment && dataModel.id) {
                 // eslint-disable-next-line react/no-array-index-key
-                return <ItemMultiple key={item.sentiment + index + dataModel.id} {...item} />;
+                return (
+                  <ItemMultiple
+                    key={item.sentiment + index + dataModel.id}
+                    {...item}
+                  />
+                );
               }
               return null;
             })}
@@ -56,7 +61,7 @@ const ItemData = (props) => {
                     key={item.label + index + dataModel.id}
                     highlight={index === 0}
                     {...item}
-                    mode={dataModel.typeModel === 2 ? 'sentiment' : 'label'}
+                    mode={dataModel.typeModel === 2 ? "sentiment" : "label"}
                   />
                 );
               }
@@ -76,7 +81,7 @@ ItemData.propTypes = {
 };
 ItemData.defaultProps = {
   resPredict: [],
-  content: '',
+  content: "",
   dataModel: {},
   id: 0,
 };

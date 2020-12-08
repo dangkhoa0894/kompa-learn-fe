@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Typography, Row, Col } from 'antd';
-import BlockModel from 'components/common/BlockModel';
-import { GET_TEMPLATE_MODEL } from 'graphql/Model/Query';
-import { useQuery } from '@apollo/client';
-import { ERROR_CODE } from 'resource/string';
-import { useHistory } from 'react-router-dom';
-import { ContainerTemplateModel } from './styled';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { Typography, Row, Col } from "antd";
+import BlockModel from "SRC/components/common/BlockModel";
+import { GET_TEMPLATE_MODEL } from "SRC/graphql/Model/Query";
+import { useQuery } from "@apollo/client";
+import { ERROR_CODE } from "SRC/resource/string";
+import { useHistory } from "react-router-dom";
+import { ContainerTemplateModel } from "./styled";
 
 const TemplateModel = (props) => {
   const { isMoreTemplate, openMoreTemplate } = props;

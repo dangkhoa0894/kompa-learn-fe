@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { contentModifyModel } from 'graphql/Cache/initialCache';
+import { useCallback, useEffect, useState } from "react";
+import { contentModifyModel } from "SRC/graphql/Cache/initialCache";
 
 export const useModifyLabel = (props) => {
   const { dataModel, content, isNew, contentActive } = props;

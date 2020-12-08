@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import media from 'styles/media';
+import styled from "styled-components";
+import media from "SRC/styles/media";
 
 export const WrapperPredict = styled.div`
   padding: 20px 20px 0px 20px;

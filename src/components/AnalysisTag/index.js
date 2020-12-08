@@ -1,9 +1,9 @@
-import React, { useMemo, memo } from 'react';
-import PropTypes from 'prop-types';
-import AmPieChart from 'components/common/Chart/Am/PieChart';
-import CounterLabel from 'components/CounterLabel';
-import Loading from 'site/user/containers/Loading/LoadingView';
-import { TemplateCss } from './styled';
+import React, { useMemo, memo } from "react";
+import PropTypes from "prop-types";
+import AmPieChart from "SRC/components/common/Chart/Am/PieChart";
+import CounterLabel from "SRC/components/CounterLabel";
+import Loading from "SRC/site/user/containers/Loading/LoadingView";
+import { TemplateCss } from "./styled";
 
 const AnalysisTagView = (props) => {
   const {
@@ -13,7 +13,9 @@ const AnalysisTagView = (props) => {
     fontSizeTitle,
   } = props;
 
-  const counterCache = useMemo(() => counterLabel && JSON.parse(counterLabel), [counterLabel]);
+  const counterCache = useMemo(() => counterLabel && JSON.parse(counterLabel), [
+    counterLabel,
+  ]);
 
   const renderChart = () => {
     switch (typeModel) {

@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Typography, Form, Row, Col, Input, notification } from 'antd';
-import { MainButton } from 'styles/mainStyled';
-import LoadingText from 'components/common/LoadingText';
-import { useMutation } from '@apollo/client';
-import { UPDATE_INFO_MODEL } from 'graphql/Model/Mutations';
-import { ERROR_CODE, _TYPENAME } from 'resource/string';
-import { ConfigBasicContain } from './styled';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Typography, Form, Row, Col, Input, notification } from "antd";
+import { MainButton } from "SRC/styles/mainStyled";
+import LoadingText from "SRC/components/common/LoadingText";
+import { useMutation } from "@apollo/client";
+import { UPDATE_INFO_MODEL } from "SRC/graphql/Model/Mutations";
+import { ERROR_CODE, _TYPENAME } from "SRC/resource/string";
+import { ConfigBasicContain } from "./styled";
 
 const formItemLayout = { labelCol: { span: 6 }, wrapperCol: { span: 24 } };
 const ConfigBasic = (props) => {
@@ -20,7 +20,9 @@ const ConfigBasic = (props) => {
   const onFinish = async (data) => {
     if (
       !loading &&
-      (data.modelName !== modelName || data.descriptions !== descriptions || data.owner !== owner)
+      (data.modelName !== modelName ||
+        data.descriptions !== descriptions ||
+        data.owner !== owner)
     ) {
       doUpdateInfo({
         variables: {
@@ -50,15 +52,15 @@ const ConfigBasic = (props) => {
               });
               setIsModify(false);
               notification.success({
-                message: 'Message',
-                description: 'Update info model successful',
+                message: "Message",
+                description: "Update info model successful",
               });
             } else {
               throw new Error(updateInfoModel.message);
             }
           } catch (e) {
             notification.error({
-              message: 'Error message',
+              message: "Error message",
               description: e.message,
             });
           }
@@ -71,9 +73,9 @@ const ConfigBasic = (props) => {
   const checkModify = () => {
     let hasModify = false;
     if (
-      form.getFieldValue('modelName') !== modelName ||
-      form.getFieldValue('descriptions') !== descriptions ||
-      form.getFieldValue('owner') !== owner
+      form.getFieldValue("modelName") !== modelName ||
+      form.getFieldValue("descriptions") !== descriptions ||
+      form.getFieldValue("owner") !== owner
     ) {
       hasModify = true;
     }
@@ -111,7 +113,11 @@ const ConfigBasic = (props) => {
               wrapperCol={{ span: 24 }}
               initialValue={owner}
             >
-              <Input type="text" placeholder={owner ? '' : 'Update owner'} onChange={checkModify} />
+              <Input
+                type="text"
+                placeholder={owner ? "" : "Update owner"}
+                onChange={checkModify}
+              />
             </Form.Item>
           </Col>
           <Col xs={{ span: 24 }} md={{ span: 12 }}>
@@ -125,7 +131,7 @@ const ConfigBasic = (props) => {
             >
               <Input.TextArea
                 type="text"
-                placeholder={descriptions ? '' : 'Update descriptions'}
+                placeholder={descriptions ? "" : "Update descriptions"}
                 className="input-descriptions"
                 onChange={checkModify}
               />
@@ -133,11 +139,19 @@ const ConfigBasic = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={{ span: 24 }} md={{ span: 12, offset: 12 }} lg={{ span: 9, offset: 15 }}>
+          <Col
+            xs={{ span: 24 }}
+            md={{ span: 12, offset: 12 }}
+            lg={{ span: 9, offset: 15 }}
+          >
             <Form.Item wrapperCol={{ span: 24 }}>
               <div className="group-button">
-                <MainButton type="primary" htmlType="submit" disabled={!isModify}>
-                  {loading ? <LoadingText title="Loading" /> : 'Save'}
+                <MainButton
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!isModify}
+                >
+                  {loading ? <LoadingText title="Loading" /> : "Save"}
                 </MainButton>
               </div>
             </Form.Item>
